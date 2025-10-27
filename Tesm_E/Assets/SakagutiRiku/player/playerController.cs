@@ -1,53 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class playerController:MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D rbody;            //Rigidbody2D型の変数
-    public float speed = 3.0f;　　//移動速度
-
-    public float jump = 6.0f;     //ジャンプ力
-    public LayerMask groundLayer; //着地できるレイヤー
-    bool goJump = false;          //ジャンプ開始フラグ
-
-    private void Update()
+    public float moveSpeed = 5f;
+    public float jumpForce = 5f;
+    private Rigidbody2D rb;
+    private bool isGrounded = false;
+    void Start()
     {
-        //キャラクターをジャンプさせる
-        if(Input.GetButtonDown("Jump"))
+        Application.targetFrameRate = 60;
+        rb = GetComponent<Rigidbody2D>();
+    }
+    void Update()
+    {
+        float moveX = Input.GetAxis("Horizontal");
+        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            Jump();
-            Debug.Log("ジャンプ");
+            rb.AddForce(Vector2.up *jumpForce, ForceMode2D.Impulse);
         }
     }
-
-    private void FixedUpdate()
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        //�n�㔻��
-        bool onGround = Physics2D.CircleCast(transform.position,   //発射位置
-                                           0.2f,                 //円の半径
-                                           Vector2.down,         //発射方向
-                                           0.0f,                 //発射距離
-                                           groundLayer);         //検出するレイヤー
-
-        if(onGround)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("ground"))
         {
-            //地面の上
-            //速度を更新する
-            rbody.linearVelocity = new Vector2(speed , rbody.linearVelocity.y);
-        }
-        if(onGround&&goJump)
-        {
-            //地面の上でジャンプキーが押された
-            //ジャンプさせる
-            Vector2 jumpPw = new Vector2(0, jump);       //ジャンプさせるベクトルを作る
-            rbody.AddForce(jumpPw, ForceMode2D.Impulse); //瞬間的な力を加える
-            goJump = false; //ジャンプフラグを下ろす
+            isGrounded = true;
         }
     }
-    //ジャンプ
-    public void Jump()
+    void OnCollisionExit2D(Collision2D collision)
     {
-        goJump = true; //ジャンプフラグを立てる
+        if (collision.gameObject.layer == LayerMask.NameToLayer("ground"))
+        {
+            isGrounded = false;
+        }
     }
 }
