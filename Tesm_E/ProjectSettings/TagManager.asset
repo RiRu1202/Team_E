@@ -4,10 +4,16 @@
 TagManager:
   serializedVersion: 3
   tags:
+<<<<<<< HEAD
   - Fire_huda
   - Fire
   - Dead
   - ground
+=======
+  - Ground
+  - FireballLauncher
+  - trap
+>>>>>>> a225778343c823e0302081d76ef259d432da87ae
   layers:
   - Default
   - TransparentFX

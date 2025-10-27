@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class player_damege:MonoBehaviour
 {
-<<<<<<< HEAD
-    public GameObject objPrefab;    //発生させるプレハブデータ
-    public float delayTime = 3.0f;  //遅延速度
-    public float firespeed = 4.0f;  //発射速度
-    public float length = 8.0f;     //範囲
-
-    GameObject player;
-=======
 
     public float knockbackForce = 7.0f;
     private void Start()
@@ -51,5 +43,4 @@ public class player_damege:MonoBehaviour
     //    
     //}
     
->>>>>>> a225778343c823e0302081d76ef259d432da87ae
 }
