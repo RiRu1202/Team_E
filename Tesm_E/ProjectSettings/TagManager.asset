@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 3
   tags:
   - ground
+  - Undefined
+  - Fire
+  - trap
+  - Ground
+  - Trap
   layers:
   - Default
   - TransparentFX
