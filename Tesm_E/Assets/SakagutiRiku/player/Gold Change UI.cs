@@ -5,12 +5,13 @@ using UnityEngine.EventSystems;
 
 public class GoldChangeUI : MonoBehaviour
 {
-    public GameObject uiPrefab;     // 切り替え用UI（Prefab）
-    public GameObject playerUI;     // 元UI
-    public string targetUIButtonName = "GoldButton"; // クリック判定するUIの名前
-    public float duration = 2f;     // 切り替えUIの表示時間
+    public GameObject uiPrefab;
+    public GameObject playerUI;
+    public string targetUIButtonName = "GoldButton";
+    public float duration = 2f;
 
     private GameObject currentUI;
+    private bool isSwitching = false;
 
     void Update()
     {
@@ -23,16 +24,17 @@ public class GoldChangeUI : MonoBehaviour
         }
     }
 
-    // クリックされたUIが targetUIButtonName か判定
     private bool IsClickedUI(string targetUIName)
     {
-        PointerEventData pointerData = new PointerEventData(EventSystem.current);
-        pointerData.position = Input.mousePosition;
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            position = Input.mousePosition
+        };
 
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerData, results);
 
-        foreach (RaycastResult result in results)
+        foreach (var result in results)
         {
             if (result.gameObject.name == targetUIName)
                 return true;
@@ -43,40 +45,38 @@ public class GoldChangeUI : MonoBehaviour
 
     private IEnumerator ShowTemporaryUI()
     {
-        // Nullチェック
-        if (uiPrefab == null)
+        if (isSwitching) yield break;
+        isSwitching = true;
+
+        Debug.Log("UI切り替え開始");
+
+        if (uiPrefab == null || playerUI == null)
         {
-            Debug.LogError("uiPrefabがアサインされていません！");
+            Debug.LogError("uiPrefab または playerUI が未設定です！");
             yield break;
         }
 
-        if (playerUI == null)
-        {
-            Debug.LogError("playerUIがアサインされていません！");
-            yield break;
-        }
-
-        GameObject canvas = GameObject.Find("Canvas");
+        Canvas canvas = FindObjectOfType<Canvas>();
         if (canvas == null)
         {
-            Debug.LogError("CanvasがHierarchyに存在しません！");
+            Debug.LogError("Canvas が見つかりません！");
             yield break;
         }
 
-        // 元UIを非表示
-        playerUI.SetActive(false);
-
-        // 切り替えUIを生成
+        playerUI.SetActive(false);  // これでスクリプトが止まる可能性あり
         currentUI = Instantiate(uiPrefab, canvas.transform);
         currentUI.transform.position = playerUI.transform.position;
 
-        // duration 秒待つ
-        yield return new WaitForSeconds(duration);
+        Debug.Log("待機開始");
+        yield return new WaitForSecondsRealtime(duration);  // ← Realtime に変更
+        Debug.Log("待機終了");
 
-        // 元UIに戻す
         if (currentUI != null)
             Destroy(currentUI);
 
         playerUI.SetActive(true);
+        Debug.Log("UI戻し完了");
+
+        isSwitching = false;
     }
 }

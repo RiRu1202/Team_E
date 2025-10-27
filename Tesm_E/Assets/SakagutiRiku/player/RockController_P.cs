@@ -1,70 +1,85 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
-public class RockController_P : MonoBehaviour
+public class RockController : MonoBehaviour
 {
-    public GameObject objPrefab;               // 生成するオブジェクト
-    public float delayTime = 1f;               // 連射防止用
-    public float rockDistance = 3f;            // プレイヤーからの距離（3マス先）
-    public string targetUIButtonName = "Rock_Frag"; // クリック判定したいUIの名前
-
-    private Transform gateTransform;           // プレイヤーの発射地点
-    private float passedTime = 0f;
-
-    void Start()
-    {
-        gateTransform = transform.Find("playergate");
-    }
+    public GameObject rockPrefab;
+    public Vector2 checkBoxSize = new Vector2(1f, 1f);
+    public LayerMask blockLayer;
+    public float shiftDistance = 1.0f;
+    public string targetObjectName = "RockButton"; // クリック対象の名前
+    public string playerGateName = "PlayerGate";   // 生成基準のオブジェクト名
+    public float spawnOffset = 3f; // PlayerGateから右に3マス
 
     void Update()
     {
-        if (objPrefab == null || gateTransform == null) return;
-
-        passedTime += Time.deltaTime;
-
         if (Input.GetMouseButtonDown(0))
         {
-            if (IsClickedUI(targetUIButtonName))
+            if (IsClickedTarget(targetObjectName))
             {
-                if (passedTime >= delayTime)
+                GameObject gate = GameObject.Find(playerGateName);
+                if (gate != null)
                 {
-                    SpawnObject();
-                    passedTime = 0f;
+                    Vector2 spawnPos = (Vector2)gate.transform.position + Vector2.right * spawnOffset;
+                    TrySpawnRock(spawnPos);
+                }
+                else
+                {
+                    Debug.LogError("PlayerGateが見つかりません！");
                 }
             }
         }
     }
 
-    // クリックしたUIが targetUIButtonName かチェック
-    private bool IsClickedUI(string targetUIName)
+    // クリックしたオブジェクトが targetName かどうか判定
+    private bool IsClickedTarget(string targetName)
     {
-        PointerEventData pointerData = new PointerEventData(EventSystem.current);
-        pointerData.position = Input.mousePosition;
+        PointerEventData pointer = new PointerEventData(EventSystem.current)
+        {
+            position = Input.mousePosition
+        };
 
         List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerData, results);
+        EventSystem.current.RaycastAll(pointer, results);
 
-        foreach (RaycastResult result in results)
+        foreach (RaycastResult r in results)
         {
-            if (result.gameObject.name == targetUIName)
+            if (r.gameObject.name == targetName)
                 return true;
         }
+
         return false;
     }
 
-    // プレイヤーの3マス先に objPrefab を生成
-    private void SpawnObject()
+    // 指定位置から岩を生成、ブロックがあれば左にずらす
+    public void TrySpawnRock(Vector2 startPos)
     {
-        Vector2 spawnPos = (Vector2)gateTransform.position + (Vector2)gateTransform.right * rockDistance;
-        GameObject obj = Instantiate(objPrefab, spawnPos, Quaternion.identity);
+        Vector2 pos = startPos;
+        int maxTries = 5;
 
-        /*// Rigidbody2Dがついていれば物理で飛ばす（任意）
-        Rigidbody2D rbody = obj.GetComponent<Rigidbody2D>();
-        if (rbody != null)
+        for (int i = 0; i < maxTries; i++)
         {
-            Vector2 dir = gateTransform.right;
-            rbody.AddForce(dir * 4f, ForceMode2D.Impulse);
-        }*/
+            Collider2D hit = Physics2D.OverlapBox(pos, checkBoxSize, 0f, blockLayer);
+            if (hit == null)
+            {
+                Instantiate(rockPrefab, pos, Quaternion.identity);
+                Debug.Log($"岩を {i} 回左にずらして生成しました。位置: {pos}");
+                return;
+            }
+
+            pos += Vector2.left * shiftDistance;
+        }
+
+        Debug.LogWarning("空いている場所が見つかりませんでした。岩を生成しません。");
+    }
+
+    // Sceneビューで判定範囲を見えるようにする
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        GameObject gate = GameObject.Find(playerGateName);
+        if (gate != null)
+            Gizmos.DrawWireCube((Vector2)gate.transform.position + Vector2.right * spawnOffset, checkBoxSize);
     }
 }
