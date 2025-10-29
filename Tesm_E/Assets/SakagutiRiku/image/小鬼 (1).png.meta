@@ -1,14 +1,10 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Tesm_E/Assets/nisimoto iori/image_iori/寺院.png.meta
-guid: efe5b05e1ad2ec14db0ba7b0ca60ee70
-========
-guid: 4024b0ae123bf174bb02f401ae48a0fc
->>>>>>>> 590f3a1aa9d512932608b092445a2103b6f054f9:Tesm_E/Assets/nisimoto iori/image_iori/ステージブロック.png.meta
+guid: 070bcede3f29e2b42ba866b7549345f5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2572743032016796308
-    second: "\u5BFA\u9662_0"
+      213: -3843023131095716881
+    second: "\u5C0F\u9B3C (1)_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -104,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u5BFA\u9662_0"
+      name: "\u5C0F\u9B3C (1)_0"
       rect:
         serializedVersion: 2
-        x: 0
-        y: 6
-        width: 151
-        height: 90
+        x: 24
+        y: 0
+        width: 202
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 49af8b9182834b320800000000000000
-      internalID: 2572743032016796308
+      spriteID: feb2e6fc2d6daaac0800000000000000
+      internalID: -3843023131095716881
       vertices: []
       indices: 
       edges: []
@@ -139,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u5BFA\u9662_0": 2572743032016796308
+      "\u5C0F\u9B3C (1)_0": -3843023131095716881
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
