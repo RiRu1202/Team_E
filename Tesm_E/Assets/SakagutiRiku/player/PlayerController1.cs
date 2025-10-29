@@ -5,7 +5,6 @@ public class PlayerController1 : MonoBehaviour
 {
     Rigidbody2D rbody;               // Rigidbody2D型の変数
     public float speed = 3.0f;
-    public float gameOverY = -10f;    // ゲームオーバーと判断するY座標
 
     public static string gameState = "playing";  // ゲームの状態
 
@@ -21,9 +20,12 @@ public class PlayerController1 : MonoBehaviour
     void Update()
     {
         if (gameState != "playing") return;
+    }
 
-        // プレイヤーのY座標が設定値より低くなったらゲームオーバー
-        if (transform.position.y < gameOverY)
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // 衝突したオブジェクトが「Dead」レイヤーまたは「Enemy」レイヤーだった場合、GameOverにする判定
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Dead")|| collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             GameOver();
         }

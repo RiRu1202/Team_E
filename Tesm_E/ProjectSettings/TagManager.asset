@@ -3,13 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-<<<<<<< HEAD
   tags:
   - ground
   - Goal
-=======
-  tags: []
->>>>>>> d381d979fc0bade3542964e73a9b84e5861a58ff
+  - PlayerAttack
+  - Trap
+  - Ground
+  - Enemy
+  - wall
   layers:
   - Default
   - TransparentFX
@@ -17,14 +18,9 @@ TagManager:
   - 
   - Water
   - UI
-<<<<<<< HEAD
   - ground
-  - player
-=======
-  - 
-  - 
->>>>>>> d381d979fc0bade3542964e73a9b84e5861a58ff
-  - 
+  - Dead
+  - Enemy
   - 
   - 
   - 
