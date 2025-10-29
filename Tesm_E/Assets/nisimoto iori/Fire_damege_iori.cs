@@ -25,6 +25,9 @@ public class Fair_damege_iori : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        else if (collision.gameObject.tag == "wall")//ínñ Ç…ìñÇΩÇÈÇ∆è¡ñ≈
+        {
+            Destroy(gameObject);
+        }
     }
 }
