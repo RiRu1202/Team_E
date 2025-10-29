@@ -16,7 +16,7 @@ public class Fair_damege_iori : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)//衝突判定
     {
-        if (collision.gameObject.tag == "Trap")//何と衝突したか確認
+        if (collision.gameObject.tag == "Trap")//罠と衝突したか確認
         {
             Debug.Log("反応したぞー！");
             Destroy(gameObject);//火のオブジェクトをデリート
@@ -25,7 +25,7 @@ public class Fair_damege_iori : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else if (collision.gameObject.tag == "wall")//地面に当たると消滅
+        else if (collision.gameObject.tag == "wall")//壁に当たると消滅
         {
             Destroy(gameObject);
         }
