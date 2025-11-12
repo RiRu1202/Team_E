@@ -7,11 +7,11 @@ TagManager:
   - ground
   - Goal
   - PlayerAttack
-  - Trap
   - Ground
   - Enemy
   - wall
   - Fire_Frag
+  - Rock_Frag
   layers:
   - Default
   - TransparentFX

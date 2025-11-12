@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// マウスクリックで特定のUIボタン（例：Fire_Frag）が押されたとき、
 /// プレイヤーの「発射口（playergate）」から弾（objPrefab）を発射するスクリプト。
+/// 最初の1発はすぐに発射可能で、その後はクールタイム(delayTime)が発生する。
 /// </summary>
 public class FireController_P : MonoBehaviour
 {
@@ -25,6 +26,9 @@ public class FireController_P : MonoBehaviour
     {
         // 子オブジェクト "playergate" を探してキャッシュ
         gateTransform = transform.Find("playergate");
+
+        // 最初の一発をすぐに撃てるように、経過時間をdelayTimeで初期化
+        passedTime = delayTime;
     }
 
     // 毎フレーム呼ばれる
