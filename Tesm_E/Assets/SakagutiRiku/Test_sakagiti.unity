@@ -349,7 +349,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 4, y: 0, z: 0}
+  - first: {x: 4, y: 1, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 0
@@ -359,7 +359,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 5, y: 0, z: 0}
+  - first: {x: 5, y: 1, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 0
@@ -369,7 +369,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 6, y: 0, z: 0}
+  - first: {x: 6, y: 1, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 0
@@ -412,7 +412,7 @@ Tilemap:
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: -2, z: 0}
-  m_Size: {x: 24, y: 3, z: 1}
+  m_Size: {x: 24, y: 4, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -1207,6 +1207,7 @@ GameObject:
   - component: {fileID: 1177771293}
   - component: {fileID: 1177771294}
   - component: {fileID: 1177771295}
+  - component: {fileID: 1177771296}
   m_Layer: 0
   m_Name: player_run1
   m_TagString: Player
@@ -1408,7 +1409,7 @@ MonoBehaviour:
   shiftDistance: 1
   targetObjectName: Rock_Frag
   playerGateName: playergate
-  spawnOffset: 3
+  spawnOffset: 7
 --- !u!95 &1177771289
 Animator:
   serializedVersion: 7
@@ -1585,6 +1586,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sound1: {fileID: 8300000, guid: 7195a8b3528064c47b67ccf64e3ad1e8, type: 3}
   delayTime: 0
+--- !u!114 &1177771296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177771281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4be057cb33f95409d5259f241eab25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1662841885
 GameObject:
   m_ObjectHideFlags: 0
@@ -12132,6 +12145,7 @@ MonoBehaviour:
   scrollSpeed: 7
   player: {fileID: 1177771283}
   goal: {fileID: 1982280840}
+  isPaused: 0
 --- !u!1 &2076275846 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 793371158912034063, guid: bb23833a6eff9cf4da38205ec2ef5e59, type: 3}
@@ -12159,7 +12173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7450675008870424671, guid: 540861a422e06c84492db23fbb0f7909, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.20382999
+      value: 0.46189913
       objectReference: {fileID: 0}
     - target: {fileID: 7450675008870424671, guid: 540861a422e06c84492db23fbb0f7909, type: 3}
       propertyPath: m_LocalScale.y
@@ -12171,7 +12185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7450675008870424671, guid: 540861a422e06c84492db23fbb0f7909, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.1899
+      value: -16.8235
       objectReference: {fileID: 0}
     - target: {fileID: 7450675008870424671, guid: 540861a422e06c84492db23fbb0f7909, type: 3}
       propertyPath: m_LocalPosition.y
