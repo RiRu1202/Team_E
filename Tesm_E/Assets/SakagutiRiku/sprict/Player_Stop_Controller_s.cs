@@ -11,8 +11,9 @@ public class Player_Stop_Controller_s : MonoBehaviour
         cameraController = FindObjectOfType<CameraController>();
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+        // 相手が wall タグなら反応
         if (collision.gameObject.CompareTag("wall"))
         {
             StartCoroutine(HandleWallCollision());
@@ -21,14 +22,16 @@ public class Player_Stop_Controller_s : MonoBehaviour
 
     private IEnumerator HandleWallCollision()
     {
-        Debug.Log("壁にぶつかった！2秒待機...");
-        yield return new WaitForSeconds(2f);
+        Debug.Log("wall に衝突！5秒待機...");
+        yield return new WaitForSeconds(5f);
 
         if (cameraController != null)
         {
-            Debug.Log("カメラ停止（1秒間）");
+            Debug.Log("カメラ停止（0.5秒間）");
             cameraController.isPaused = true;
-            yield return new WaitForSeconds(1f);
+
+            yield return new WaitForSeconds(0.5f);
+
             cameraController.isPaused = false;
             Debug.Log("カメラ再開！");
         }
