@@ -12,6 +12,7 @@ TagManager:
   - wall
   - Fire_Frag
   - Rock_Frag
+  - Water_Frag
   layers:
   - Default
   - TransparentFX
