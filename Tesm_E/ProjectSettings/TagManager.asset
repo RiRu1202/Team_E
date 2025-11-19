@@ -4,17 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
-<<<<<<< HEAD
   - Enemy
   - PlayerAttack
-=======
   - ground
-  - Undefined
-  - Fire
-  - trap
-  - Ground
-  - Trap
->>>>>>> 590f3a1aa9d512932608b092445a2103b6f054f9
+  - wall
   layers:
   - Default
   - TransparentFX
@@ -23,7 +16,7 @@ TagManager:
   - Water
   - UI
   - ground
-  - 
+  - wall
   - 
   - 
   - 
