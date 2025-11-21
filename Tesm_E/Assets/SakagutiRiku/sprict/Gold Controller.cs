@@ -12,8 +12,6 @@ public class GoldController : MonoBehaviour
     }
     void Update()
     {
-        float moveX = Input.GetAxis("Horizontal");
-        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_damege_s:MonoBehaviour
+public class Player_damege_iori:MonoBehaviour
 {
     public float knockbackForce = 3.0f;
     public float knockbackDuration = 0.3f;
@@ -24,14 +24,15 @@ public class Player_damege_s:MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)//�Փ˔���
     {
-        if (collision.gameObject.tag == "trap")//�^�O�̐ݒ�
+        if (collision.gameObject.tag == "Enemy")//�^�O�̐ݒ�
         {
             Debug.Log("�����������[�I");
             float dirx = transform.position.x - collision.transform.position.x;
             Vector2 knockbackDir = new Vector2(Mathf.Sign(dirx), 0);
             StartCoroutine(ApplyKnockback(knockbackDir));
         }
-        else if (collision.gameObject.tag == "wall")//�^�O�̐ݒ�
+
+        if (collision.gameObject.tag == "wall")//�^�O�̐ݒ�
         {
             Debug.Log("�����������[�I");
             float dirx = transform.position.x - collision.transform.position.x;

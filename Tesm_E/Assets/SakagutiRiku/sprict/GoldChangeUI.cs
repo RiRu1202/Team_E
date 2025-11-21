@@ -56,7 +56,8 @@ public class GoldChangeUI : MonoBehaviour
             yield break;
         }
 
-        Canvas canvas = FindObjectOfType<Canvas>();
+        Canvas canvas = FindFirstObjectByType<Canvas>();
+
         if (canvas == null)
         {
             Debug.LogError("Canvas ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
