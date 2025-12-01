@@ -13,6 +13,7 @@ TagManager:
   - Fire_Frag
   - Rock_Frag
   - Water_Frag
+  - PlayerwaterAttack
   layers:
   - Default
   - TransparentFX
