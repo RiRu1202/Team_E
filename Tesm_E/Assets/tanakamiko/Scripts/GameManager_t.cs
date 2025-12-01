@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;  //UIを使うのに必要
-public class GameManager:MonoBehaviour
+public class GameManager_t:MonoBehaviour
 {
     public GameObject mainImage;      //画像を持つGameObject
     public string gameOverSceneName = "GameOva";
@@ -12,7 +12,7 @@ public class GameManager:MonoBehaviour
     //+++時間制限追加+++
     public GameObject timeBar;        //時間表示イメージ
     public GameObject timeText;       //時間テキスト
-    TimeController timeCnt;           //TimeController
+    TimeController_t timeCnt;           //TimeController
 
     void Start()
     {
@@ -21,7 +21,7 @@ public class GameManager:MonoBehaviour
         
         //+++時間制限追加+++
         //TimeControllerを取得
-        timeCnt = GetComponent<TimeController>();
+        timeCnt = GetComponent<TimeController_t>();
         if (timeCnt != null)
         { 
            if (timeCnt.gameTime==0.0f)
@@ -32,13 +32,13 @@ public class GameManager:MonoBehaviour
     }
     void Update()
     {
-        
-         if (PlayerController.gameState=="playing")
+
+         if (PlayerController_t.gameState=="playing")
         {
             //ゲーム中
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             //PlayerControllerを取得する
-            PlayerController playerCnt = player.GetComponent<PlayerController>();
+            PlayerController_t playerCnt = player.GetComponent<PlayerController_t>();
             //+++時間制限追加+++
             //タイムを更新する
             if (timeCnt != null)

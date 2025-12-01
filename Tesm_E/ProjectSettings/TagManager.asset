@@ -11,6 +11,7 @@ TagManager:
   - Ground
   - Enemy
   - wall
+  - SaveManager
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - 
   - Water
   - UI
-  - ground
+  - Ground
   - Dead
   - Enemy
   - 
