@@ -3,20 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - ground
-  - Goal
-  - PlayerAttack
-  - Enemy
-  - wall
-<<<<<<< HEAD
-  - SaveManager
-=======
-  - Fire_Frag
-  - Rock_Frag
-  - Water_Frag
-  - PlayerwaterAttack
->>>>>>> 4317bb9dddd7e1a7a4eb690af0d78b1bb41631e3
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -24,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Ground
-  - Dead
-  - Enemy
-  - Fire_Frag
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
