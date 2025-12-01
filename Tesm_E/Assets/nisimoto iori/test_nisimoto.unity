@@ -448,7 +448,7 @@ Transform:
   m_GameObject: {fileID: 425331848}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.24, y: 1.36, z: 0}
+  m_LocalPosition: {x: 6.09, y: 1.36, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -674,7 +674,7 @@ Transform:
   m_GameObject: {fileID: 705361400}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.35, y: 5.33, z: 0}
+  m_LocalPosition: {x: 3.35, y: -4.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -981,7 +981,7 @@ Transform:
   m_GameObject: {fileID: 862230292}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8, y: 4.74, z: 0}
+  m_LocalPosition: {x: 11.02, y: 6.23, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1107,7 +1107,7 @@ Transform:
   m_GameObject: {fileID: 868045304}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.03, y: 5.51, z: 20}
+  m_LocalPosition: {x: -0.25, y: -4.59, z: 20}
   m_LocalScale: {x: 0.65, y: 0.65, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1328,7 +1328,6 @@ GameObject:
   - component: {fileID: 1558061378}
   - component: {fileID: 1558061382}
   - component: {fileID: 1558061381}
-  - component: {fileID: 1558061383}
   m_Layer: 0
   m_Name: "\u9752\u3044\u706B\u306E\u7389_3"
   m_TagString: Untagged
@@ -1400,7 +1399,7 @@ Transform:
   m_GameObject: {fileID: 1558061377}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.77, y: 3.1, z: 0}
+  m_LocalPosition: {x: -4.43, y: -4.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1484,22 +1483,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
---- !u!114 &1558061383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1558061377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47c19d97f15a4b648a4a457a40aba7ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  moveDistance: 3
-  floatSpeed: 2
-  floatHeight: 0.5
 --- !u!1001 &1580699735
 PrefabInstance:
   m_ObjectHideFlags: 0
