@@ -6,8 +6,9 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// マウスクリックで特定のUIボタン（例：Fire_Frag）が押されたとき、
 /// プレイヤーの「発射口（playergate）」から弾（objPrefab）を発射するスクリプト。
+/// 最初の1発はすぐに発射可能で、その後はクールタイム(delayTime)が発生する。
 /// </summary>
-public class FireController_P : MonoBehaviour
+public class Water_Controller_s : MonoBehaviour
 {
     [Header("発射設定")]
     public GameObject objPrefab;         // 発射するオブジェクト（例：弾、火球など）のプレハブ
@@ -15,7 +16,7 @@ public class FireController_P : MonoBehaviour
     public float fireSpeed = 4.0f;       // 弾を飛ばす速度（力の大きさ）
 
     [Header("UI設定")]
-    public string targetUIButtonName = "Fire_Frag"; // 発射をトリガーするUIボタンの名前
+    public string targetUIButtonName = "Water_Frag"; // 発射をトリガーするUIボタンの名前
 
     private Transform gateTransform;     // 弾の発射位置（子オブジェクト "playergate" のTransform）
     private float passedTime = 0f;       // 前回の発射から経過した時間
@@ -25,6 +26,9 @@ public class FireController_P : MonoBehaviour
     {
         // 子オブジェクト "playergate" を探してキャッシュ
         gateTransform = transform.Find("playergate");
+
+        // 最初の一発をすぐに撃てるように、経過時間をdelayTimeで初期化
+        passedTime = delayTime;
     }
 
     // 毎フレーム呼ばれる
@@ -45,7 +49,7 @@ public class FireController_P : MonoBehaviour
                 // 一定の発射間隔（delayTime）が経過していたら発射
                 if (passedTime >= delayTime)
                 {
-                    Fire();          // 弾を発射
+                    Water();          // 弾を発射
                     passedTime = 0f; // 経過時間をリセット
                 }
             }
@@ -80,7 +84,7 @@ public class FireController_P : MonoBehaviour
     /// <summary>
     /// 弾（objPrefab）を生成して、前方向（playergate の右方向）に発射する
     /// </summary>
-    public void Fire()
+    public void Water()
     {
         // 発射位置が設定されていない場合は何もしない
         if (gateTransform == null) return;

@@ -7,11 +7,16 @@ TagManager:
   - ground
   - Goal
   - PlayerAttack
-  - Trap
-  - Ground
   - Enemy
   - wall
+<<<<<<< HEAD
   - SaveManager
+=======
+  - Fire_Frag
+  - Rock_Frag
+  - Water_Frag
+  - PlayerwaterAttack
+>>>>>>> 4317bb9dddd7e1a7a4eb690af0d78b1bb41631e3
   layers:
   - Default
   - TransparentFX
@@ -22,7 +27,7 @@ TagManager:
   - Ground
   - Dead
   - Enemy
-  - 
+  - Fire_Frag
   - 
   - 
   - 

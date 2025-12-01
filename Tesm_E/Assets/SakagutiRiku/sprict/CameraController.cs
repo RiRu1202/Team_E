@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour
     public Transform player;          // プレイヤー
     public Transform goal;            // ゴール
     public static string gameState = "playing";  // "playing" / "clear" / "gameover"
+    public bool isPaused = false;     // ← カメラ一時停止用
 
     void Start()
     {
@@ -18,7 +19,10 @@ public class CameraController : MonoBehaviour
         // ゲーム中でなければ何もしない
         if (gameState != "playing") return;
 
-        // プレイヤーが消えたらゲームオーバー（例：死亡などで破棄された場合）
+        // 一時停止中はスクロールしない
+        if (isPaused) return;
+
+        // プレイヤーが消えたらゲームオーバー
         if (player == null)
         {
             gameState = "gameover";
