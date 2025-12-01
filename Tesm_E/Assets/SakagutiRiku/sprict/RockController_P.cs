@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections;  // ← 必須！！
 using System.Collections.Generic;
 
 public class RockController : MonoBehaviour
@@ -8,9 +9,13 @@ public class RockController : MonoBehaviour
     public Vector2 checkBoxSize = new Vector2(1f, 1f);
     public LayerMask blockLayer;
     public float shiftDistance = 1.0f;
-    public string targetObjectName = "RockButton"; // クリック対象の名前
-    public string playerGateName = "PlayerGate";   // 生成基準のオブジェクト名
-    public float spawnOffset = 3f; // PlayerGateから右に3マス
+    public string targetObjectName = "RockButton";
+    public string playerGateName = "PlayerGate";
+    public float spawnOffset = 3f;
+
+    [Header("クールタイム設定")]
+    public float cooldownTime = 1.5f;  // クールタイム秒
+    private bool isOnCooldown = false; // クールタイム中？
 
     void Update()
     {
@@ -18,11 +23,21 @@ public class RockController : MonoBehaviour
         {
             if (IsClickedTarget(targetObjectName))
             {
+                // クールタイム中なら生成しない
+                if (isOnCooldown)
+                {
+                    Debug.Log("クールタイム中！岩は生成されません。");
+                    return;
+                }
+
                 GameObject gate = GameObject.Find(playerGateName);
                 if (gate != null)
                 {
                     Vector2 spawnPos = (Vector2)gate.transform.position + Vector2.right * spawnOffset;
                     TrySpawnRock(spawnPos);
+
+                    // クールタイム開始
+                    StartCoroutine(StartCooldown());
                 }
                 else
                 {
@@ -30,6 +45,15 @@ public class RockController : MonoBehaviour
                 }
             }
         }
+    }
+
+    // クールタイム開始
+    private IEnumerator StartCooldown()
+    {
+        isOnCooldown = true;
+        yield return new WaitForSeconds(cooldownTime);
+        isOnCooldown = false;
+        Debug.Log("クールタイム終了！");
     }
 
     // クリックしたオブジェクトが targetName かどうか判定

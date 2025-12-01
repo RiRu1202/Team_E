@@ -7,7 +7,6 @@ TagManager:
   - ground
   - Goal
   - PlayerAttack
-  - Ground
   - Enemy
   - wall
   - Fire_Frag
