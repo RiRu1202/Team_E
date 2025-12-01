@@ -49,7 +49,7 @@ public class Water_Controller_s : MonoBehaviour
                 // 一定の発射間隔（delayTime）が経過していたら発射
                 if (passedTime >= delayTime)
                 {
-                    Fire();          // 弾を発射
+                    Water();          // 弾を発射
                     passedTime = 0f; // 経過時間をリセット
                 }
             }
@@ -84,7 +84,7 @@ public class Water_Controller_s : MonoBehaviour
     /// <summary>
     /// 弾（objPrefab）を生成して、前方向（playergate の右方向）に発射する
     /// </summary>
-    public void Fire()
+    public void Water()
     {
         // 発射位置が設定されていない場合は何もしない
         if (gateTransform == null) return;

@@ -1230,7 +1230,7 @@ Transform:
   m_GameObject: {fileID: 404615959}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.64, y: -0.33, z: 0}
+  m_LocalPosition: {x: 2.45, y: -0.61, z: 0}
   m_LocalScale: {x: 1.2373174, y: 1.2531329, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1981,7 +1981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objPrefab: {fileID: 5917712412080917750}
-  delayTime: 5
+  delayTime: 0
   fireSpeed: 15
   targetUIButtonName: Water_Frag
 --- !u!1 &1662841885
@@ -12560,6 +12560,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2481461314848318749, guid: acf727e6f201fd243ad19de8a9e3be2c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2748260711974137007, guid: acf727e6f201fd243ad19de8a9e3be2c, type: 3}
       propertyPath: m_Radius
       value: 0.22456127
@@ -12598,19 +12602,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8816087706152277461, guid: acf727e6f201fd243ad19de8a9e3be2c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.3892791
+      value: 2.4746242
       objectReference: {fileID: 0}
     - target: {fileID: 8816087706152277461, guid: acf727e6f201fd243ad19de8a9e3be2c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4.432358
+      value: 2.2919722
       objectReference: {fileID: 0}
     - target: {fileID: 8816087706152277461, guid: acf727e6f201fd243ad19de8a9e3be2c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.0033
+      value: -19.0383
       objectReference: {fileID: 0}
     - target: {fileID: 8816087706152277461, guid: acf727e6f201fd243ad19de8a9e3be2c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.47
+      value: -3.6948
       objectReference: {fileID: 0}
     - target: {fileID: 8816087706152277461, guid: acf727e6f201fd243ad19de8a9e3be2c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12986,6 +12990,7 @@ SceneRoots:
   - {fileID: 8477004692706361577}
   - {fileID: 7533624097660186832}
   - {fileID: 7058243594325840528}
+  - {fileID: 5917712412080917749}
   - {fileID: 1982280840}
   - {fileID: 1978320921}
   - {fileID: 1177771283}
@@ -12994,4 +12999,3 @@ SceneRoots:
   - {fileID: 390050047}
   - {fileID: 257877660}
   - {fileID: 1991627401}
-  - {fileID: 5917712412080917749}
