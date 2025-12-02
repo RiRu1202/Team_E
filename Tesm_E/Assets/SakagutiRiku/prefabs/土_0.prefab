@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7450675008870424671}
   - component: {fileID: 2953138297624220273}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: "\u571F_0"
   m_TagString: Untagged
   m_Icon: {fileID: 0}

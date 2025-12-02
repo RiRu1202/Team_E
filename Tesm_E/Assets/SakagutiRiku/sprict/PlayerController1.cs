@@ -27,6 +27,7 @@ public class PlayerController1 : MonoBehaviour
         // 衝突したオブジェクトが「Dead」レイヤーまたは「Enemy」レイヤーだった場合、GameOverにする判定
         if (collision.gameObject.layer == LayerMask.NameToLayer("Dead")|| collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
+            Debug.Log("ゲームオーバー画面移動");
             GameOver();
         }
     }
@@ -43,7 +44,7 @@ public class PlayerController1 : MonoBehaviour
     void GameOver()
     {
         Debug.Log("ゲームオーバー！");
-        SceneManager.LoadScene("GameOver"); // シーン名を正しく修正
+        SceneManager.LoadScene("GameOva"); // シーン名を正しく修正
     }
 
     // ゴール判定
