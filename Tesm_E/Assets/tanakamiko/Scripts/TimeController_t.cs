@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class TimeController:MonoBehaviour
+public class TimeController_t:MonoBehaviour
 {
     public bool isCountDown = true;  //true=時間をカウントダウン計測する
     public float gameTime = 0;       //ゲームの最大時間
