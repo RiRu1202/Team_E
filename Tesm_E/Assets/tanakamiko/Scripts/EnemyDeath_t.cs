@@ -6,9 +6,6 @@ public class EnemyDeath_t:MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PlayerAttack"))
         {
-            DeadEnemyData_t.RegisterDeadEnemy(gameObject.name);
-
-
             Destroy(gameObject);
             Destroy(collision.gameObject);
             Debug.Log("“G‚ª‰Š‚ÅÁ–Å‚µ‚Ü‚µ‚½I");

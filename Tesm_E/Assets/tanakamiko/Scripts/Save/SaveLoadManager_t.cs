@@ -1,118 +1,106 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
+using System.Collections;
 
 public class SaveLoadManager_t : MonoBehaviour
 {
-    public AudioSource audioSource;
-    public AudioClip clickSE;
-    public string nextSceneName;
+    // 🔊ボタン効果音
+    public AudioClip buttonSound;
+    private AudioSource audioSource;
 
-    public void OnButtonClick()
+    void Awake()
     {
-        StartCoroutine(PlaySEThenChangeScene());
-    }
-    private System.Collections.IEnumerator PlaySEThenChangeScene()
-    {
-        if (audioSource != null && clickSE != null)
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
         {
-            audioSource.PlayOneShot(clickSE);
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
-        // 効果音の長さだけ待つ
-        yield return new WaitForSeconds(clickSE.length);
-        // シーン移動
-        SceneManager.LoadScene(nextSceneName);
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-//public void OnButtonClick()
-//{
-//    if (audioSource != null && clickSE != null)
-//    {
-//        audioSource.PlayOneShot(clickSE);
-//    }
-//    SceneManager.LoadScene(nextSceneName);
-//    SceneManager.sceneLoaded += OnSceneLoaded;
-//}
-void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    // 効果音を鳴らして、長さだけ待ってからシーン移動する処理
+    IEnumerator PlaySoundThenLoad(string sceneName)
     {
-        if (scene.name == PlayerPrefs.GetString("SavedScene"))
+        audioSource.PlayOneShot(buttonSound);
+        yield return new WaitForSeconds(buttonSound.length); // 🎯効果音の長さだけ待つ
+        SceneManager.LoadScene(sceneName);
+    }
+
+    void PlayButtonSound()
+    {
+        if (buttonSound != null)
         {
-            // 死んだ敵だけロード → その敵だけ削除
-            DeadEnemyData_t.LoadDeadEnemiesAndDestro();
-            // プレイヤーを復元
-            GameObject playerObj = GameObject.FindWithTag("Player");
-            if (playerObj != null)
-            {
-                float px = PlayerPrefs.GetFloat("PlayerX");
-                float py = PlayerPrefs.GetFloat("PlayerY");
-                playerObj.transform.position = new Vector3(px, py, 0);
-            }
-            // カメラ位置も復元
-            Camera cam = Camera.main;
-            if (cam != null)
-            {
-                float cx = PlayerPrefs.GetFloat("CameraX");
-                float cy = PlayerPrefs.GetFloat("CameraY");
-                cam.transform.position = new Vector3(cx, cy, -10);
-            }
-            // 1回だけ実行するため解除
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            audioSource.PlayOneShot(buttonSound);
         }
-        //    // 効果音だけ鳴らす（これはOK）
-        //    if (audioSource != null && clickSE != null)
-        //    {
-        //        audioSource.PlayOneShot(clickSE);
-        //    }
-        //    // 先にゲームシーンをロード（タイトル→ゲーム）
-        //    SceneManager.LoadScene(nextSceneName);
-        //    SceneManager.sceneLoaded += OnSceneLoaded;
-        //}
-        //void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        //{
-        //    // プレイヤーをゲームシーン内で探す
-        //    GameObject playerObj = GameObject.FindWithTag("Player");
-        //    if (playerObj != null)
-        //    {
-        //        float px = PlayerPrefs.GetFloat("PlayerX");
-        //        float py = PlayerPrefs.GetFloat("PlayerY");
-        //        Vector3 pos = playerObj.transform.position;
-        //        playerObj.transform.position = new Vector3(px, py, pos.z);
-        //    }
-        //    // カメラもゲームシーンで復元
-        //    Camera cam = Camera.main;
-        //    if (cam != null)
-        //    {
-        //        float cx = PlayerPrefs.GetFloat("CameraX");
-        //        float cy = PlayerPrefs.GetFloat("CameraY");
-        //        Vector3 cpos = cam.transform.position;
-        //        cam.transform.position = new Vector3(cx, cy, cpos.z);
-        //    }
-        //    // 1回だけ実行なので解除
-        //    SceneManager.sceneLoaded -= OnSceneLoaded;
-        //    Debug.Log("ロード完了しました");
+    }
+
+    // 🎯Continueボタン押したとき
+    public void OnContinueButtonPressed()
+    {
+        if (buttonSound != null)
+        {
+            string saved = PlayerPrefs.GetString("SavedScene", "");
+            if (!string.IsNullOrEmpty(saved))
+            {
+                StartCoroutine(PlaySoundThenLoad(saved));
+            }
+            else
+            {
+                audioSource.PlayOneShot(buttonSound);
+                Debug.Log("セーブデータがありません");
+            }
+        }
+    }
+
+    // 🎯「次へボタン」押したとき（クリアシーン内）
+    public void OnNextSceneButtonPressed()
+    {
+        string now = SceneManager.GetActiveScene().name;
+
+        if (now == "Clear")
+        {
+            // Stage1だけクリア済 -> Stage2へ
+            if (PlayerPrefs.GetInt("ClearedStage1", 0) == 1 && PlayerPrefs.GetInt("ClearedStage2", 0) == 0)
+            {
+                PlayerPrefs.SetString("SavedScene", "Test_sakaguti");
+                PlayerPrefs.Save();
+                StartCoroutine(PlaySoundThenLoad("Test_sakaguti"));
+                return;
+            }
+
+            // Stage2クリア済 -> LastStageへ
+            if (PlayerPrefs.GetInt("ClearedStage2", 0) == 1)
+            {
+                PlayerPrefs.SetString("SavedScene", "Test_tanaka");
+                PlayerPrefs.Save();
+                StartCoroutine(PlaySoundThenLoad("Test_tanaka"));
+                return;
+            }
+
+            // LastStageクリア済ならタイトルへ
+            if (PlayerPrefs.GetString("SavedScene", "") == "Test_tanaka")
+            {
+                PlayerPrefs.SetString("SavedScene", "Title");
+                PlayerPrefs.Save();
+                StartCoroutine(PlaySoundThenLoad("Title"));
+                return;
+            }
+
+            // どの条件も合ってない -> タイトル
+            StartCoroutine(PlaySoundThenLoad("Title"));
+        }
+
+        // 🛑タイトルで次へ押すと何も起きない
+        if (now == "Title")
+        {
+            Debug.Log("タイトル画面では次へは無効です");
+            if (buttonSound != null) PlayButtonSound(); // 鳴らしたいなら鳴らせます（※移動はしません）
+        }
+    }
+
+    // ⭐ステージ移動時だけ保存
+    public void SaveScene(string sceneName)
+    {
+        PlayerPrefs.SetString("SavedScene", sceneName);
+        PlayerPrefs.Save();
     }
 }
-
-        //// ========== ここが敵を“殺す（Destroy）”処理 ==========
-        //GameObject[] sceneEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-        //int savedAlive = PlayerPrefs.GetInt("EnemyCount", 0);
-        //// ★「SavedAliveCount に含まれない敵」はすべてDestroy★
-        //int currentIndex = 0;
-        //for (int i = 0; i < sceneEnemies.Length; i++)
-        //{
-        //    if (currentIndex < savedAlive)
-        //    {
-        //        // 生きてた敵はそのまま（動かないので位置変更も不要 or したければ後で指定）
-        //        currentIndex++;
-        //        continue;
-        //    }
-        //    // ここでDestroy（＝セーブ時に死んでいた敵を“殺す”）
-        //    Destroy(sceneEnemies[i]);
-        //    Debug.Log("敵（" + sceneEnemies[i].name + "）をロードでDestroyしました（＝死亡状態復元）");
-        //}
-        //Debug.Log("ロード完了！（Save時に死んでたEnemyは復元Destroyで殺しました）");
-
-
-
-    
