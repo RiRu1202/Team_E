@@ -8,8 +8,8 @@ public class Stage1Goal_t : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerPrefs.SetInt("ClearedStage1", 1);
-            //FindObjectOfType<SaveLoadManager_t>().SaveScene("Stage1");
-            SceneManager.LoadScene("StageClear");
+            FindObjectOfType<SaveLoadManager_t>().SaveScene("Test_sakagiti");
+            SceneManager.LoadScene("Clear");
         }
     }
 }

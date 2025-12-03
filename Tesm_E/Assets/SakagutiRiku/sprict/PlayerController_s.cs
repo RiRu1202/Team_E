@@ -36,8 +36,8 @@ public class PlayerController_s : MonoBehaviour
     // 何かと衝突した瞬間に呼ばれる（2D 物理）
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // 衝突したオブジェクトが「ground」レイヤーだった場合、地面に接地していると判定
-        if (collision.gameObject.layer == LayerMask.NameToLayer("ground"))
+        // 衝突したオブジェクトが「Ground」レイヤーだった場合、地面に接地していると判定
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = true;
         }
@@ -46,8 +46,8 @@ public class PlayerController_s : MonoBehaviour
     // 衝突していたオブジェクトから離れた瞬間に呼ばれる（2D 物理）
     void OnCollisionExit2D(Collision2D collision)
     {
-        // 離れたオブジェクトが「ground」レイヤーだった場合、接地していないと判定
-        if (collision.gameObject.layer == LayerMask.NameToLayer("ground"))
+        // 離れたオブジェクトが「Ground」レイヤーだった場合、接地していないと判定
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = false;
         }
