@@ -70,9 +70,9 @@ public class SaveLoadManager_t : MonoBehaviour
             // Stage2クリア済 -> LastStageへ
             if (PlayerPrefs.GetInt("ClearedStage2", 0) == 1)
             {
-                PlayerPrefs.SetString("SavedScene", "Test_tanaka");
+                PlayerPrefs.SetString("SavedScene", "Test_nisimoto");
                 PlayerPrefs.Save();
-                StartCoroutine(PlaySoundThenLoad("Test_tanaka"));
+                StartCoroutine(PlaySoundThenLoad("Test_nisimoto"));
                 return;
             }
 
