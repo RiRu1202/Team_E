@@ -20,20 +20,6 @@ public class PlayerController_t:MonoBehaviour
 
     void Start()
     {
-        if (PlayerPrefs.HasKey("PlayerX"))
-        {
-            float x = PlayerPrefs.GetFloat("PlayerX");
-            float y = PlayerPrefs.GetFloat("PlayerY");
-            transform.position = new Vector2(x, y);
-            Debug.Log("位置をロードしました（2D）");
-        }
-        else
-        {
-            Debug.Log("保存データなし");
-        }
-
-        Application.targetFrameRate = 60;
-
         //Rigidbody2Dを取ってくる
         rbody = GetComponent<Rigidbody2D>();
         gameState = "playing";  //ゲーム中にする

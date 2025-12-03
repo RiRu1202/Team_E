@@ -1,12 +1,21 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Goal_t : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene("Clear"); // © ƒNƒŠƒAƒV[ƒ“–¼‚ğ“ü‚ê‚é
+            if (PlayerPrefs.GetInt("ClearedStage2", 0) == 1)
+            {
+                PlayerPrefs.SetString("SavedScene", "Test_tanaka");
+                PlayerPrefs.Save();
+                SceneManager.LoadScene("Clear"); // â­ã‚¯ãƒªã‚¢ã‚·ãƒ¼ãƒ³å…±é€šã¸ï¼
+            }
+            else
+            {
+                SceneManager.LoadScene("Title");
+            }
         }
     }
 }
