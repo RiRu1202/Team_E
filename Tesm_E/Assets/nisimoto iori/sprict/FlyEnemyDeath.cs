@@ -59,14 +59,4 @@ public class FlyEnemyDeath : MonoBehaviour
         // 現在のX位置を保ちながらY位置だけ変更
         transform.position = new Vector2(transform.position.x, newY);
     }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        // プレイヤーの攻撃に当たったら削除
-        if (!isDead && other.CompareTag("PlayerAttack"))
-        {
-            isDead = true;
-            Destroy(gameObject);
-        }
-    }
 }

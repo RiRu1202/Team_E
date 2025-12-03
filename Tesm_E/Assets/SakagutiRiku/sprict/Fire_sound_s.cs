@@ -44,7 +44,7 @@ public class Fire_sound_s : MonoBehaviour
                 Debug.Log($"クリック対象: {hit.collider.name}");
 
                 // Fire_Fragタグがついているオブジェクトなら
-                if (hit.collider.CompareTag("Fire_Frag"))
+                if (hit.collider.CompareTag("Fire_tag"))
                 {
                     TryPlaySound();
                 }

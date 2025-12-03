@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement; // シーン切り替えに必要
 
-public class PlayerController1 : MonoBehaviour
+public class PlayerController1_s : MonoBehaviour
 {
     Rigidbody2D rbody;               // Rigidbody2D型の変数
     public float speed = 3.0f;
@@ -25,8 +25,9 @@ public class PlayerController1 : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         // 衝突したオブジェクトが「Dead」レイヤーまたは「Enemy」レイヤーだった場合、GameOverにする判定
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Dead")|| collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Dead"))
         {
+            Debug.Log("ゲームオーバー画面移動");
             GameOver();
         }
     }
@@ -43,7 +44,7 @@ public class PlayerController1 : MonoBehaviour
     void GameOver()
     {
         Debug.Log("ゲームオーバー！");
-        SceneManager.LoadScene("GameOver"); // シーン名を正しく修正
+        SceneManager.LoadScene("GameOva"); // シーン名を正しく修正
     }
 
     // ゴール判定
