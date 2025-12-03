@@ -8,6 +8,10 @@ TagManager:
   - SaveManager
   - PlayerAttack
   - ground
+  - wall
+  - Fire_Frag
+  - Goal
+  - Rock_Frag
   layers:
   - Default
   - TransparentFX
@@ -16,7 +20,7 @@ TagManager:
   - Water
   - UI
   - Wall
-  - 
+  - Dead
   - 
   - 
   - 
