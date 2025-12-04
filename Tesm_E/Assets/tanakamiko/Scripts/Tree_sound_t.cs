@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Rock_sound_t : MonoBehaviour
+public class Tree_sound_t : MonoBehaviour
 {
     [Header("クリック時に鳴らす音")]
     public AudioClip sound1;
@@ -43,8 +43,8 @@ public class Rock_sound_t : MonoBehaviour
             {
                 Debug.Log($"クリック対象: {hit.collider.name}");
 
-                // Rock_Fragタグがついているオブジェクトなら
-                if (hit.collider.CompareTag("Rock_Frag"))
+                // Water_Fragタグがついているオブジェクトなら
+                if (hit.collider.CompareTag("Tree_Frag"))
                 {
                     TryPlaySound();
                 }

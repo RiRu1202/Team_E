@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Rock_sound_t : MonoBehaviour
+public class Rock_sound_s : MonoBehaviour
 {
     [Header("ƒNƒŠƒbƒN‚É–Â‚ç‚·‰¹")]
     public AudioClip sound1;

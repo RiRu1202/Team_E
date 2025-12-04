@@ -1,15 +1,17 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Stage1Goal_t : MonoBehaviour
+public class Stage1Goal_s : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             PlayerPrefs.SetInt("ClearedStage1", 1);
-            FindObjectOfType<SaveLoadManager_t>().SaveScene("Test_sakagiti");
-            SceneManager.LoadScene("Clear");
+            PlayerPrefs.SetString("SavedScene", "Test_sakagiti");
+            PlayerPrefs.Save();
+            SceneManager.LoadScene("Clear"); // ⭐ Clear へ
+            Debug.Log("Test_sakagiti クリア！");
         }
     }
 }
