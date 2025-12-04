@@ -1,6 +1,5 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
-using System.Collections;  // ← 必須！！
+using System.Collections;
 using System.Collections.Generic;
 
 public class RockController_t : MonoBehaviour
@@ -9,7 +8,6 @@ public class RockController_t : MonoBehaviour
     public Vector2 checkBoxSize = new Vector2(1f, 1f);
     public LayerMask blockLayer;
     public float shiftDistance = 1.0f;
-    public string targetObjectName = "Rock_Frag";
     public string playerGateName = "PlayerGate";
     public float spawnOffset = 3f;
 
@@ -21,9 +19,10 @@ public class RockController_t : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (IsClickedTarget(targetObjectName))
+            // Rock_Frag をクリックしたか？
+            if (IsClickedTarget())
             {
-                // クールタイム中なら生成しない
+                // クールタイム中は生成しない
                 if (isOnCooldown)
                 {
                     Debug.Log("クールタイム中！岩は生成されません。");
@@ -56,25 +55,30 @@ public class RockController_t : MonoBehaviour
         Debug.Log("クールタイム終了！");
     }
 
-    // クリックしたオブジェクトが targetName かどうか判定
-    private bool IsClickedTarget(string targetName)
+    // クリックしたオブジェクトが "Rock_Frag" タグかどうかだけを判定
+    private bool IsClickedTarget()
     {
-        PointerEventData pointer = new PointerEventData(EventSystem.current)
-        {
-            position = Input.mousePosition
-        };
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
 
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointer, results);
-
-        foreach (RaycastResult r in results)
+        if (hit.collider == null)
         {
-            if (r.gameObject.name == targetName)
-                return true;
+            Debug.Log("Raycast が何にも当たっていません");
+            return false;
+        }
+
+        Debug.Log("Raycast が当たったオブジェクト: " + hit.collider.gameObject.name +
+                  " / タグ: " + hit.collider.gameObject.tag);
+
+        if (hit.collider.CompareTag("Rock_Frag"))
+        {
+            Debug.Log("Rock_Frag をクリックしました！");
+            return true;
         }
 
         return false;
     }
+
 
     // 指定位置から岩を生成、ブロックがあれば左にずらす
     public void TrySpawnRock(Vector2 startPos)
