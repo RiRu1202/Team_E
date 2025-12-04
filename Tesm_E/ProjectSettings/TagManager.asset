@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 3
   tags:
+<<<<<<< HEAD
   - PlayerAttack
   - Enemy
   - Rock_Frag
@@ -16,6 +17,19 @@ TagManager:
   - wall
   - SaveManager
   - Fire_Frag
+=======
+  - Enemy
+  - SaveManager
+  - PlayerAttack
+  - ground
+  - wall
+  - Fire_Frag
+  - Goal
+  - Rock_Frag
+  - Fire_tag
+  - Water_Frag
+  - PlayerwaterAttack
+>>>>>>> c431d956d2e1b54992ad22f9b99e10d02679bab3
   layers:
   - Default
   - TransparentFX
@@ -23,9 +37,14 @@ TagManager:
   - ground
   - Water
   - UI
+  - Wall
   - Dead
+<<<<<<< HEAD
   - Enemy
   - wall
+=======
+  - Ground
+>>>>>>> c431d956d2e1b54992ad22f9b99e10d02679bab3
   - 
   - 
   - 

@@ -34,6 +34,10 @@ public class FireController_P : MonoBehaviour
     // 毎フレーム呼ばれる
     void Update()
     {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
         // 発射するオブジェクト（プレハブ）が設定されていない場合は何もしない
         if (objPrefab == null) return;
 
@@ -44,7 +48,7 @@ public class FireController_P : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // 指定したUI（targetUIButtonName）がクリックされたかチェック
-            if (IsClickedUI(targetUIButtonName))
+            if (hit.collider.CompareTag("Fire_Frag"))
             {
                 // 一定の発射間隔（delayTime）が経過していたら発射
                 if (passedTime >= delayTime)

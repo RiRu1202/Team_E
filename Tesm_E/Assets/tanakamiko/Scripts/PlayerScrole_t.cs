@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// 2D プレイヤーの移動とジャンプを制御するスクリプト
 /// </summary>
-public class PlayerController_s : MonoBehaviour
+public class PlayerScrole_t : MonoBehaviour
 {
     [Header("プレイヤーの移動設定")]
     public float moveSpeed = 5f;   // 横移動の速さ
