@@ -15,6 +15,7 @@ TagManager:
   - Fire_tag
   - Water_Frag
   - PlayerwaterAttack
+  - Tree_Frag
   layers:
   - Default
   - TransparentFX
