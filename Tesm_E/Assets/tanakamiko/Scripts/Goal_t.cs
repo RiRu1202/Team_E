@@ -10,7 +10,8 @@ public class Goal_t : MonoBehaviour
             {
                 PlayerPrefs.SetString("SavedScene", "Test_tanaka");
                 PlayerPrefs.Save();
-                SceneManager.LoadScene("Clear"); // ⭐クリアシーン共通へ！
+                SceneManager.LoadScene("Clear"); // ⭐ クリアシーン共通へ
+                Debug.Log("Test_tanaka クリア！");
             }
             else
             {
