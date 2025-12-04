@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Fire_sound_s : MonoBehaviour
+public class Fire_sound_t : MonoBehaviour
 {
     [Header("ƒNƒŠƒbƒN‚É–Â‚ç‚·‰¹")]
     public AudioClip sound1;
