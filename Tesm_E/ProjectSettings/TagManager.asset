@@ -3,6 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
+<<<<<<< HEAD
   tags:
   - Enemy
   - SaveManager
@@ -16,16 +17,19 @@ TagManager:
   - Water_Frag
   - PlayerwaterAttack
   - Tree_Frag
+=======
+  tags: []
+>>>>>>> 350c3131ad520d225352110a56cfc0ca7dc91316
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - ground
+  - 
   - Water
   - UI
-  - Wall
-  - Dead
-  - Ground
+  - 
+  - 
+  - 
   - 
   - 
   - 
