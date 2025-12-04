@@ -61,18 +61,18 @@ public class SaveLoadManager_t : MonoBehaviour
             // Stage1だけクリア済 -> Stage2へ
             if (PlayerPrefs.GetInt("ClearedStage1", 0) == 1 && PlayerPrefs.GetInt("ClearedStage2", 0) == 0)
             {
-                PlayerPrefs.SetString("SavedScene", "Test_sakaguti");
+                PlayerPrefs.SetString("SavedScene", "Test_sakagiti");
                 PlayerPrefs.Save();
-                StartCoroutine(PlaySoundThenLoad("Test_sakaguti"));
+                StartCoroutine(PlaySoundThenLoad("Test_sakagiti"));
                 return;
             }
 
             // Stage2クリア済 -> LastStageへ
             if (PlayerPrefs.GetInt("ClearedStage2", 0) == 1)
             {
-                PlayerPrefs.SetString("SavedScene", "Test_nisimoto");
+                PlayerPrefs.SetString("SavedScene", "test_nisimoto");
                 PlayerPrefs.Save();
-                StartCoroutine(PlaySoundThenLoad("Test_nisimoto"));
+                StartCoroutine(PlaySoundThenLoad("test_nisimoto"));
                 return;
             }
 
