@@ -4,6 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/tanakamiko/Howtooperate.unity
+    guid: 0c7eeca94c0c10c4bbda6b6b96fbea40
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
