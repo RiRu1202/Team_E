@@ -4,15 +4,6 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/nisimoto iori/test_nisimoto.unity
-    guid: f52261aea193d3745bf4fc970b1f3cf5
-  - enabled: 1
-    path: Assets/tanakamiko/GameOva.unity
-    guid: 936529c720d820148a4482b6922a6051
-  - enabled: 1
-    path: Assets/tanakamiko/Clear.unity
-    guid: bfd77a70824906942988ef886ba79350
+  m_Scenes: []
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

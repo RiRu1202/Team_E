@@ -1019,7 +1019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1443571778}
   clickSE: {fileID: 8300000, guid: 8f7cb73d4f4be474a96c81b13a23e7f3, type: 3}
-  nextSceneName: Test_tanaka
+  nextSceneName: Test_sakagiti
 --- !u!82 &1443571778
 AudioSource:
   m_ObjectHideFlags: 0

@@ -778,7 +778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 996225686}
   clickSE: {fileID: 8300000, guid: 8f7cb73d4f4be474a96c81b13a23e7f3, type: 3}
-  nextSceneName: Test_tanaka
+  nextSceneName: Test_sakagiti
 --- !u!114 &996225683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -791,9 +791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab89057ab5d62e41a65fbbe6bbb0612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 996225686}
-  clickSE: {fileID: 8300000, guid: 8f7cb73d4f4be474a96c81b13a23e7f3, type: 3}
-  nextSceneName: Test_tanaka
+  buttonSound: {fileID: 8300000, guid: 8f7cb73d4f4be474a96c81b13a23e7f3, type: 3}
 --- !u!114 &996225684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1165,7 +1163,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 996225683}
         m_TargetAssemblyTypeName: SaveLoadManager_t, Assembly-CSharp
-        m_MethodName: OnButtonClick
+        m_MethodName: OnContinueButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
