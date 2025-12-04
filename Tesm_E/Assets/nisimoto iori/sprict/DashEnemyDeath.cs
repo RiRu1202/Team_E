@@ -14,8 +14,5 @@ void Start() { // Rigidbody2D を取得
     }
     void Move() { // 常に左方向へ一定速度で移動する
         transform.Translate(Vector2.left * speed * Time.deltaTime);
-    } 
-    void OnBecameInvisible() { // 画面外に出たら自動で削除（メモリ節約）
-     Destroy(gameObject); 
-    } 
+    }  
 }
