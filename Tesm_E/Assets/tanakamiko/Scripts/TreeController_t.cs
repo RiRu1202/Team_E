@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// Tree_Frag タグクリックで木を生成し、成長アニメーション付き
-/// 最初の1回だけクールタイムなし
-/// Groundレイヤーの地面上に生成
+/// Tree_Frag をクリックしたら木を生成する
+/// FireController と同じ「時間経過方式のクールタイム」
+/// 最初の1回のみクールタイムなし
 /// </summary>
 public class TreeController_t : MonoBehaviour
 {
@@ -24,11 +24,20 @@ public class TreeController_t : MonoBehaviour
     public Transform playerGate;       // 木を出す位置
     public LayerMask groundLayer;      // 地面レイヤー
 
-    private bool canSpawn = true;      // クールタイム中かどうか
-    private bool firstUse = true;      // 最初の1回だけクールタイム無し
+    private float passedTime = 0f;     // 経過時間
+    private bool firstUse = true;      // 最初の1回だけクールタイムなし
+
+    void Start()
+    {
+        // 最初の1回はすぐ発動できるように…後で firstUse で制御する
+        passedTime = cooldown;
+    }
 
     void Update()
     {
+        // 経過時間を加算
+        passedTime += Time.deltaTime;
+
         if (Input.GetMouseButtonDown(0))
         {
             if (IsClickedTreeFrag())
@@ -66,45 +75,42 @@ public class TreeController_t : MonoBehaviour
 
     private void TrySpawnTree()
     {
-        if (!canSpawn || playerGate == null) return;
-        StartCoroutine(SpawnTree());
+        if (playerGate == null) return;
+
+        // 最初の1回はクールタイム無視して OK
+        if (firstUse)
+        {
+            SpawnTreeNow();
+            firstUse = false;
+            passedTime = 0f;
+            return;
+        }
+
+        // クールタイム方式（FireControllerと同じ）
+        if (passedTime >= cooldown)
+        {
+            SpawnTreeNow();
+            passedTime = 0f;
+        }
     }
 
-    private IEnumerator SpawnTree()
+    private void SpawnTreeNow()
     {
-        canSpawn = false;
-
         // playerGate の向き
         float dir = playerGate.localScale.x > 0 ? 1 : -1;
 
-        // playerGate から spawnDistance 先に上から Ray を飛ばして地面判定
-        Vector3 rayStart = playerGate.position + new Vector3(spawnDistance * dir, 5f, 0f); // 上方向から
+        Vector3 rayStart = playerGate.position + new Vector3(spawnDistance * dir, 5f, 0f);
         RaycastHit2D hit = Physics2D.Raycast(rayStart, Vector2.down, 10f, groundLayer);
 
         if (hit.collider != null)
         {
-            // 地面に当たった位置に木を生成
             GameObject tree = Instantiate(treePrefab, hit.point, Quaternion.identity);
-
-            // 成長アニメーション開始
             StartCoroutine(GrowTree(tree.transform));
         }
         else
         {
             Debug.LogWarning("木を生成する地面が見つかりません。");
         }
-
-        // 最初の1回だけクールタイムなし
-        if (firstUse)
-        {
-            firstUse = false;
-            canSpawn = true;
-            yield break;
-        }
-
-        // 通常クールタイム
-        yield return new WaitForSeconds(cooldown);
-        canSpawn = true;
     }
 
     // 成長アニメーション
@@ -112,6 +118,7 @@ public class TreeController_t : MonoBehaviour
     {
         Vector3 startScale = new Vector3(treeWidth, 0.1f, 1);
         Vector3 endScale = new Vector3(treeWidth, growHeight, 1);
+
         float time = 0f;
         tree.localScale = startScale;
 

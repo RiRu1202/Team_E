@@ -48,7 +48,7 @@ public class PlayerController1_s : MonoBehaviour
     }
 
     // ゴール判定
-    void OnTriggerEnter2D(Collider2D other)
+    /*void OnTriggerEnter2D(Collider2D other)
     {
         // 触れた相手が "Goal" タグの場合のみ反応
         if (other.CompareTag("Goal"))
@@ -59,5 +59,5 @@ public class PlayerController1_s : MonoBehaviour
             // "Clear" シーンに切り替え
             SceneManager.LoadScene("Clear");
         }
-    }
+    }*/
 }
