@@ -56,8 +56,8 @@ public class PlayerController1_n : MonoBehaviour
             // カメラ停止などに使うゲーム状態を変更
             CameraController.gameState = "clear";
 
-            // "Clear" シーンに切り替え
-            SceneManager.LoadScene("Clear");
+            //// "Clear" シーンに切り替え
+            //SceneManager.LoadScene("Clear");
         }
     }
 }
