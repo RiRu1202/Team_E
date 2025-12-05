@@ -3,36 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-<<<<<<< HEAD
   tags:
   - wall
-=======
-<<<<<<< HEAD
-  tags: []
-=======
-<<<<<<< HEAD
-  tags: []
-=======
-  tags:
->>>>>>> a0f94d16d43e7fd1b3be48993ee0407a6ffe9282
-  - Enemy
   - Rock_Frag
   - Tree_Frag
   - SaveManager
-<<<<<<< HEAD
-=======
-  - wall
->>>>>>> a0f94d16d43e7fd1b3be48993ee0407a6ffe9282
   - Water_Frag
   - Fire_Frag
   - PlayerAttack
+  - Enemy
   - PlayerwaterAttack
   - ground
-<<<<<<< HEAD
-=======
->>>>>>> eeddd5abbbc8082f9dfb5c902dfe97858af445e0
->>>>>>> fbe3b288f4125432deca44cd6a6acdbef3e640c5
->>>>>>> a0f94d16d43e7fd1b3be48993ee0407a6ffe9282
+  - Goal
   layers:
   - Default
   - TransparentFX
