@@ -1,6 +1,5 @@
 using UnityEngine;
-
-public class DashEnemyDeath : MonoBehaviour
+public class DashEnemyDeath_t : MonoBehaviour
 {
     [Header("移動設定")] public float speed = 2f; // 左に移動するスピード
     private bool isDead = false; // 敵が倒されたかどうかのフラグ
