@@ -4,9 +4,9 @@
 private bool isDead = false; // 敵が倒されたかどうかのフラグ
 void Start() { // Rigidbody2D を取得
   Rigidbody2D rb = GetComponent<Rigidbody2D>(); 
-        if (rb != null) { // 重力を無効化して空中に浮かせる（落ちないように）
-         rb.gravityScale = 1;
-        }
+       if (rb != null) { // 重力を無効化して空中に浮かせる（落ちないように）
+        rb.gravityScale = 1;
+       }
     }
     void Update() { // 倒されていないときだけ移動処理を行う
         if (!isDead) { Move();

@@ -36,7 +36,7 @@ public class PlayerController_n:MonoBehaviour
         void OnCollisionEnter2D(Collision2D collision)
         {
             // 衝突したオブジェクトが「ground」レイヤーだった場合、地面に接地していると判定
-            if (collision.gameObject.layer == LayerMask.NameToLayer("ground"))
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
                 isGrounded = true;
             }
@@ -46,7 +46,7 @@ public class PlayerController_n:MonoBehaviour
         void OnCollisionExit2D(Collision2D collision)
         {
             // 離れたオブジェクトが「ground」レイヤーだった場合、接地していないと判定
-            if (collision.gameObject.layer == LayerMask.NameToLayer("ground"))
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
                 isGrounded = false;
             }
