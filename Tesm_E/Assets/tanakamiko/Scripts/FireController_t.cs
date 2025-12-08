@@ -36,8 +36,7 @@ public class FireController_t : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            // UIタグがクリックされたか判定
-            if (hit.collider.CompareTag("Fire_Frag"))
+            if (hit.collider != null && hit.collider.CompareTag("Fire_Frag"))
             {
                 if (passedTime >= delayTime)
                 {
@@ -46,6 +45,7 @@ public class FireController_t : MonoBehaviour
                 }
             }
         }
+
     }
 
     /// <summary>

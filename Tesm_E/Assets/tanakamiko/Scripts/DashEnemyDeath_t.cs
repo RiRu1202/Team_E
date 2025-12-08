@@ -1,17 +1,5 @@
-<<<<<<< HEAD
-ï»¿using UnityEngine;
- public class DashEnemyDeath : MonoBehaviour
-{[Header("ç§»å‹•è¨­å®š")] public float speed = 2f; // å·¦ã«ç§»å‹•ã™ã‚‹ã‚¹ãƒ”ãƒ¼ãƒ‰
-private bool isDead = false; // æ•µãŒå€’ã•ã‚ŒãŸã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
-void Start() { // Rigidbody2D ã‚’å–å¾—
-  Rigidbody2D rb = GetComponent<Rigidbody2D>(); 
-       if (rb != null) { // é‡åŠ›ã‚’ç„¡åŠ¹åŒ–ã—ã¦ç©ºä¸­ã«æµ®ã‹ã›ã‚‹ï¼ˆè½ã¡ãªã„ã‚ˆã†ã«ï¼‰
-        rb.gravityScale = 1;
-       }
-=======
 using UnityEngine;
-
-public class DashEnemyDeath : MonoBehaviour
+public class DashEnemyDeath_t : MonoBehaviour
 {
     [Header("ˆÚ“®İ’è")] public float speed = 2f; // ¶‚ÉˆÚ“®‚·‚éƒXƒs[ƒh
     private bool isDead = false; // “G‚ª“|‚³‚ê‚½‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
@@ -22,7 +10,6 @@ public class DashEnemyDeath : MonoBehaviour
         { // d—Í‚ğ–³Œø‰»‚µ‚Ä‹ó’†‚É•‚‚©‚¹‚éi—‚¿‚È‚¢‚æ‚¤‚Éj
             rb.gravityScale = 1;
         }
->>>>>>> 101f0fd386128ccc887f0f33c258cff8af10126d
     }
     void Update()
     { // “|‚³‚ê‚Ä‚¢‚È‚¢‚Æ‚«‚¾‚¯ˆÚ“®ˆ—‚ğs‚¤
