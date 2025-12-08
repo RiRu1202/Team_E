@@ -1,11 +1,11 @@
 <<<<<<< HEAD
-﻿using UnityEngine;
+�E�using UnityEngine;
  public class DashEnemyDeath : MonoBehaviour
-{[Header("移動設定")] public float speed = 2f; // 左に移動するスピード
-private bool isDead = false; // 敵が倒されたかどうかのフラグ
-void Start() { // Rigidbody2D を取得
+{[Header("移動設宁E)] public float speed = 2f; // 左に移動するスピ�EチE
+private bool isDead = false; // 敵が倒されたかどぁE��のフラグ
+void Start() { // Rigidbody2D を取征E
   Rigidbody2D rb = GetComponent<Rigidbody2D>(); 
-       if (rb != null) { // 重力を無効化して空中に浮かせる（落ちないように）
+       if (rb != null) { // 重力を無効化して空中に浮かせる（落ちなぁE��ぁE���E�E
         rb.gravityScale = 1;
        }
 =======
