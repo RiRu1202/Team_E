@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3781573123107439437}
   - component: {fileID: -2258728327712550696}
   - component: {fileID: -4492351778757964350}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: "\u5C71\u59E5_0_t"
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -177,6 +177,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  groundCheckDistance: 2
 --- !u!114 &-4492351778757964350
 MonoBehaviour:
   m_ObjectHideFlags: 0

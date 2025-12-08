@@ -1,25 +1,71 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 public class DashEnemyDeath_t : MonoBehaviour
 {
-    [Header("ˆÚ“®İ’è")] public float speed = 2f; // ¶‚ÉˆÚ“®‚·‚éƒXƒs[ƒh
-    private bool isDead = false; // “G‚ª“|‚³‚ê‚½‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
+    [Header("ç§»å‹•è¨­å®š")]
+    public float speed = 2f;
+
+    private bool isDead = false;
+    private Rigidbody2D rb;
+    private Collider2D col;
+    private int moveDir = -1; // -1:å·¦ã€1:å³
+
     void Start()
-    { // Rigidbody2D ‚ğæ“¾
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
-        { // d—Í‚ğ–³Œø‰»‚µ‚Ä‹ó’†‚É•‚‚©‚¹‚éi—‚¿‚È‚¢‚æ‚¤‚Éj
-            rb.gravityScale = 1;
-        }
+    {
+        rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
+
+        rb.gravityScale = 1;
+
+        // Enemy ã‚¿ã‚°åŒå£«ã®è¡çªã‚’ç„¡è¦–
+        IgnoreEnemyCollisions();
     }
+
     void Update()
-    { // “|‚³‚ê‚Ä‚¢‚È‚¢‚Æ‚«‚¾‚¯ˆÚ“®ˆ—‚ğs‚¤
+    {
         if (!isDead)
         {
             Move();
         }
     }
+
     void Move()
-    { // í‚É¶•ûŒü‚Öˆê’è‘¬“x‚ÅˆÚ“®‚·‚é
-        transform.Translate(Vector2.left * speed * Time.deltaTime);
+    {
+        transform.Translate(Vector2.right * moveDir * speed * Time.deltaTime);
+    }
+
+    // â–  å£ã«å½“ãŸã£ãŸã‚‰åè»¢
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("wall"))
+        {
+            Flip();
+        }
+    }
+
+    // â–  æ–¹å‘ã¨è¦‹ãŸç›®ã‚’åè»¢
+    void Flip()
+    {
+        moveDir *= -1;
+
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+    }
+
+    // â˜… Enemy ã‚¿ã‚°åŒå£«ã®è¡çªã‚’ç„¡è¦–
+    void IgnoreEnemyCollisions()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemies)
+        {
+            if (enemy == this.gameObject) continue;
+
+            Collider2D otherCol = enemy.GetComponent<Collider2D>();
+            if (otherCol != null && col != null)
+            {
+                Physics2D.IgnoreCollision(col, otherCol, true);
+            }
+        }
     }
 }
