@@ -6,12 +6,10 @@ public class EnemyDeath_n:MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         //衝突した相手のオブジェクトが「PlayerAttack」タグを持っていたら
-        if (other.gameObject.tag == "PlayerAttack")
+        if (other.gameObject.tag == "PlayerAttack"|| other.gameObject.tag == "PlayerwaterAttack")
         {
-          
             //このスクリプトがアタッチされているゲームオブジェクト（敵）
             Destroy(gameObject);
         }
-
     }
 }
