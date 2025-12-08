@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> b1ff25c7ee89d3081045e52a5ec754d0513f3b98
 using UnityEngine;
 
 public class DashEnemyDeath : MonoBehaviour
