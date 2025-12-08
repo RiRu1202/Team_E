@@ -25,7 +25,7 @@ public class PlayerController1_t : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         // 衝突したオブジェクトが「Dead」レイヤーまたは「Enemy」レイヤーだった場合、GameOverにする判定
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Dead"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Dead")|| collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             Debug.Log("ゲームオーバー画面移動");
             GameOver();
