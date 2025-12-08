@@ -16,7 +16,7 @@ public class FireController_n : MonoBehaviour
     public float fireSpeed = 4f;   // 弾の速度
 
     [Header("発射対象タグ")]
-    public string fireTag = "Fire_tag";  // ← クリック対象のタグ
+    public string targetUITagName = "Fire_Frag";  // ← クリック対象のタグ
 
     private Transform gateTransform;     // 発射位置（playergate）
     private float passedTime = 0f;
@@ -31,16 +31,19 @@ public class FireController_n : MonoBehaviour
 
     void Update()
     {
+        // マウス位置をワールド座標に変換
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        // 2D用のレイキャスト（Z方向ではなくXY平面）
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+        if (objPrefab == null) return;
+
         passedTime += Time.deltaTime;
 
-        // 左クリック
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("iti");
-            // Fire_tag をクリックしたか？
-            if (CheckClickedObjectHasTag2D(fireTag))
+            if (hit.collider != null && hit.collider.CompareTag("Fire_Frag"))
             {
-                Debug.Log("当たり");
                 if (passedTime >= delayTime)
                 {
                     Fire();
@@ -51,18 +54,23 @@ public class FireController_n : MonoBehaviour
     }
 
     /// <summary>
-    /// クリックした2Dオブジェクトにtagが付いているか判定
+    /// クリックされたUIの中に tag が一致するものがあるか判定
     /// </summary>
-    private bool CheckClickedObjectHasTag2D(string tagName)
+    private bool IsClickedUIByTag(string targetTag)
     {
-        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        PointerEventData pointerData = new PointerEventData(EventSystem.current);
+        pointerData.position = Input.mousePosition;
 
-        // クリック地点の2D Raycast
-        RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
 
-        if (hit.collider != null)
+        foreach (RaycastResult result in results)
         {
-            return hit.collider.CompareTag(tagName);
+            // ★タグで判定するように変更↓
+            if (result.gameObject.CompareTag(targetTag))
+            {
+                return true;
+            }
         }
 
         return false;
@@ -73,23 +81,17 @@ public class FireController_n : MonoBehaviour
     /// </summary>
     private void Fire()
     {
-        if (gateTransform == null)
-        {
-            Debug.LogWarning("playergate が見つかりません！");
-            return;
-        }
+        if (gateTransform == null) return;
 
-        // 発射位置は Playergate の場所！
         Vector2 pos = gateTransform.position;
+
         GameObject obj = Instantiate(objPrefab, pos, Quaternion.identity);
 
-        Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        Rigidbody2D rbody = obj.GetComponent<Rigidbody2D>();
+        if (rbody != null)
         {
-            // Playergate の右方向へ飛ばす
             Vector2 dir = gateTransform.right;
-
-            rb.AddForce(dir * fireSpeed, ForceMode2D.Impulse);
+            rbody.AddForce(dir * fireSpeed, ForceMode2D.Impulse);
         }
     }
 }
