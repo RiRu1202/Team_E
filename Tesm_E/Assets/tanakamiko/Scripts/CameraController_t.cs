@@ -4,7 +4,6 @@ public class CameraController_t : MonoBehaviour
 {
     public float scrollSpeed = 3.0f;  // カメラのスクロール速度
     public Transform player;          // プレイヤー
-    public Transform goal;            // ゴール
     public static string gameState = "playing";  // "playing" / "clear" / "gameover"
     public bool isPaused = false;     // ← カメラ一時停止用
 
@@ -26,13 +25,6 @@ public class CameraController_t : MonoBehaviour
         if (player == null)
         {
             gameState = "gameover";
-            return;
-        }
-
-        // プレイヤーがゴールに到達したらクリア
-        if (player.position.x >= goal.position.x)
-        {
-            gameState = "clear";
             return;
         }
 
