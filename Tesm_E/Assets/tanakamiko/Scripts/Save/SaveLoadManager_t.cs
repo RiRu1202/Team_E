@@ -4,7 +4,7 @@ using System.Collections;
 
 public class SaveLoadManager_t : MonoBehaviour
 {
-    // 🔊ボタン効果音
+    //ボタン効果音
     public AudioClip buttonSound;
     private AudioSource audioSource;
     private bool isMoving = false; // 連打防止ロック
@@ -33,7 +33,7 @@ public class SaveLoadManager_t : MonoBehaviour
     }
 
     // =========================
-    // 🎯 Continueボタン処理
+    // Continueボタン処理
     // =========================
     public void OnContinueButtonPressed()
     {
@@ -53,7 +53,7 @@ public class SaveLoadManager_t : MonoBehaviour
     }
 
     // =========================
-    // 🎯 次のシーンへボタン処理
+    // 次のシーンへボタン処理
     // =========================
     public void OnNextSceneButtonPressed()
     {
@@ -63,7 +63,7 @@ public class SaveLoadManager_t : MonoBehaviour
 
         if (now == "Clear")
         {
-            // ✅ Stage1だけクリア済 → Stage2へ
+            //Stage1だけクリア済 → Stage2へ
             if (PlayerPrefs.GetInt("ClearedStage1", 0) == 1 &&
                 PlayerPrefs.GetInt("ClearedStage2", 0) == 0)
             {
@@ -73,7 +73,7 @@ public class SaveLoadManager_t : MonoBehaviour
                 return;
             }
 
-            // ✅ Stage2もクリア済 → ラストステージへ
+            //Stage2もクリア済 → ラストステージへ
             if (PlayerPrefs.GetInt("ClearedStage2", 0) == 1)
             {
                 SaveScene("Test_tanaka");
@@ -82,7 +82,7 @@ public class SaveLoadManager_t : MonoBehaviour
                 return;
             }
 
-            // ✅ ラストクリア済 → タイトルへ戻る
+            //ラストクリア済 → タイトルへ戻る
             if (PlayerPrefs.GetString("SavedScene", "") == "Test_tanaka")
             {
                 SaveScene("Title");
@@ -96,7 +96,7 @@ public class SaveLoadManager_t : MonoBehaviour
             return;
         }
 
-        // 🛑タイトルで Next 押す → 何も起きない
+        //タイトルで Next 押す → 何も起きない
         if (now == "Title")
         {
             Debug.Log("タイトル画面では次へは無効です");
@@ -104,7 +104,7 @@ public class SaveLoadManager_t : MonoBehaviour
     }
 
     // =========================
-    // ⭐ シーン名だけ保存
+    //シーン名だけ保存
     // =========================
     public void SaveScene(string sceneName)
     {
