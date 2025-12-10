@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/tanakamiko/Clear.unity
     guid: bfd77a70824906942988ef886ba79350
   - enabled: 1
+    path: Assets/tanakamiko/LastClear.unity
+    guid: 0032b63907cb2a64e953709842162df6
+  - enabled: 1
     path: Assets/tanakamiko/GameOva.unity
     guid: 936529c720d820148a4482b6922a6051
   - enabled: 1

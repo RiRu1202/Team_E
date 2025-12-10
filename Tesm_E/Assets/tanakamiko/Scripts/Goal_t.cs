@@ -6,15 +6,21 @@ public class Goal_t : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            // Stage2クリア済みならラストゴールを認める
             if (PlayerPrefs.GetInt("ClearedStage2", 0) == 1)
             {
+                // 最後にクリアしたステージとして保存
                 PlayerPrefs.SetString("SavedScene", "Test_tanaka");
                 PlayerPrefs.Save();
-                SceneManager.LoadScene("Clear"); // ⭐ クリアシーン共通へ
-                Debug.Log("Test_tanaka クリア！");
+
+                // ⭐ ラスト専用のクリア画面へ行く
+                SceneManager.LoadScene("LastClear");
+
+                Debug.Log("Test_tanaka クリア！ → LastClearへ");
             }
             else
             {
+                // Stage2クリアしていないのに来たらタイトルへ
                 SceneManager.LoadScene("Title");
             }
         }
