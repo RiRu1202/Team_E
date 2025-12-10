@@ -39,17 +39,34 @@ public class SaveLoadManager_t : MonoBehaviour
     {
         if (isMoving) return;
 
-        string savedScene = PlayerPrefs.GetString("SavedScene", "");
-        if (!string.IsNullOrEmpty(savedScene))
-        {
-            StartCoroutine(PlaySoundThenLoad(savedScene));
-            Debug.Log("Continue → " + savedScene + " から再開");
-        }
-        else
+        string saved = PlayerPrefs.GetString("SavedScene", "");
+
+        // 何もセーブされていない場合
+        if (string.IsNullOrEmpty(saved))
         {
             if (buttonSound != null) audioSource.PlayOneShot(buttonSound);
             Debug.Log("セーブデータがありません");
+            return;
         }
+
+        // ⭐ クリアしていないステージへは行かせないチェック
+        if (saved == "test_nisimoto" && PlayerPrefs.GetInt("ClearedStage1", 0) == 0)
+        {
+            Debug.Log("Stage1未クリアなので Stage2には進めません");
+            if (buttonSound != null) audioSource.PlayOneShot(buttonSound);
+            return;
+        }
+
+        if (saved == "Test_tanaka" && PlayerPrefs.GetInt("ClearedStage2", 0) == 0)
+        {
+            Debug.Log("Stage2未クリアのため LastStageへ進めません");
+            if (buttonSound != null) audioSource.PlayOneShot(buttonSound);
+            return;
+        }
+
+        // 🎯 問題なければ効果音 → 待機 → シーン移動
+        StartCoroutine(PlaySoundThenLoad(saved));
+        Debug.Log("Continue → " + saved + " へ");
     }
 
     // =========================

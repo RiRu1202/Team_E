@@ -8,10 +8,9 @@ public class Stage1Goal_s : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerPrefs.SetInt("ClearedStage1", 1);
-            PlayerPrefs.SetString("SavedScene", "Test_sakagiti");
+            PlayerPrefs.SetString("SavedScene", "test_nisimoto");
             PlayerPrefs.Save();
             SceneManager.LoadScene("Clear"); // ⭐ Clear へ
-            Debug.Log("Test_sakagiti クリア！");
         }
     }
 }

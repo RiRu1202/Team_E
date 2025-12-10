@@ -4,25 +4,21 @@ public class Goal_t : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            // Stage2クリア済みならラストゴールを認める
-            if (PlayerPrefs.GetInt("ClearedStage2", 0) == 1)
+            if (other.CompareTag("Player"))
             {
-                // 最後にクリアしたステージとして保存
-                PlayerPrefs.SetString("SavedScene", "Test_tanaka");
-                PlayerPrefs.Save();
+                if (PlayerPrefs.GetInt("ClearedStage2", 0) == 1)
+                {
+                    // ⭐ 次がないので Title を保存
+                    PlayerPrefs.SetString("SavedScene", "Title");
+                    PlayerPrefs.Save();
 
-                // ⭐ ラスト専用のクリア画面へ行く
-                SceneManager.LoadScene("LastClear");
-
-                Debug.Log("Test_tanaka クリア！ → LastClearへ");
+                    // 次へボタンなしのクリア画面へ
+                    SceneManager.LoadScene("LastClear");
+                }
+                else
+                {
+                    SceneManager.LoadScene("Title");
+                }
             }
-            else
-            {
-                // Stage2クリアしていないのに来たらタイトルへ
-                SceneManager.LoadScene("Title");
-            }
-        }
     }
 }

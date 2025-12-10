@@ -10,10 +10,9 @@ public class Stage2Gole_n : MonoBehaviour
             if (PlayerPrefs.GetInt("ClearedStage1", 0) == 1)
             {
                 PlayerPrefs.SetInt("ClearedStage2", 1);
-                PlayerPrefs.SetString("SavedScene", "test_nisimoto");
+                PlayerPrefs.SetString("SavedScene", "Test_tanaka");
                 PlayerPrefs.Save();
                 SceneManager.LoadScene("Clear"); //Clear Ç÷
-                Debug.Log("test_nisimoto ÉNÉäÉAÅI");
             }
             else
             {
