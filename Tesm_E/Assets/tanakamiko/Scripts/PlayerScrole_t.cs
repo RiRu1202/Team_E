@@ -1,69 +1,72 @@
 using UnityEngine;
 
 /// <summary>
-/// 2D ƒvƒŒƒCƒ„[‚ÌˆÚ“®‚ÆƒWƒƒƒ“ƒv‚ğ§Œä‚·‚éƒXƒNƒŠƒvƒg
+/// 2D ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•ã¨ã‚¸ãƒ£ãƒ³ãƒ—ã‚’åˆ¶å¾¡ã™ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆï¼ˆã‚ªãƒ¼ãƒˆã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ï¼‰
+/// å£ã«å¼•ã£ã‹ã‹ã‚Šã«ãã„ã‚ˆã†èª¿æ•´æ¸ˆã¿
 /// </summary>
 public class PlayerScrole_t : MonoBehaviour
 {
-    [Header("ƒvƒŒƒCƒ„[‚ÌˆÚ“®İ’è")]
-    public float moveSpeed = 5f;   // ‰¡ˆÚ“®‚Ì‘¬‚³
-    public float jumpForce = 5f;   // ƒWƒƒƒ“ƒv—Íiã•ûŒü‚Ö‚Ì—Íj
+    [Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•è¨­å®š")]
+    public float moveSpeed = 5f;   // ã‚ªãƒ¼ãƒˆã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é€Ÿåº¦
+    public float jumpForce = 5f;   // ã‚¸ãƒ£ãƒ³ãƒ—åŠ›
 
-    private Rigidbody2D rb;        // ƒvƒŒƒCƒ„[‚Ì Rigidbody2D ƒRƒ“ƒ|[ƒlƒ“ƒgi•¨—‰‰Z‚Ég—pj
-    private bool isGrounded = false; // ’n–Ê‚ÉÚ‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©iƒWƒƒƒ“ƒv§Œä‚Ég—pj
-    private bool isJumping = false; // © ƒWƒƒƒ“ƒv’†‚©‚Ç‚¤‚©ŠÇ—
+    private Rigidbody2D rb;
 
-    // ƒQ[ƒ€ŠJn‚Éˆê“x‚¾‚¯ŒÄ‚Î‚ê‚éƒƒ\ƒbƒh
+    private bool isGrounded = false;  // åœ°é¢ã«æ¥ã—ã¦ã„ã‚‹ã‹
+    private bool isJumping = false;   // ã‚¸ãƒ£ãƒ³ãƒ—ä¸­ã‹ã©ã†ã‹
+
     void Start()
     {
-        // ƒtƒŒ[ƒ€ƒŒ[ƒg‚ğ60FPS‚ÉŒÅ’è
         Application.targetFrameRate = 60;
-
-        // Rigidbody2D ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğæ“¾‚µ‚ÄƒLƒƒƒbƒVƒ…
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // –ˆƒtƒŒ[ƒ€ŒÄ‚Î‚ê‚éƒƒ\ƒbƒh
     void Update()
     {
-        // šš ƒI[ƒgƒXƒNƒ[ƒ‹ˆ—ií‚É‰E‚ÖˆÚ“®jšš
-        float xSpeed = moveSpeed;
-
-        // šš ƒWƒƒƒ“ƒv’†‚Í‰¡‰Ÿ‚µ‚ğ­‚µã‚ß‚éi•Ç‚É‹z‚¢•t‚­‚Ì–h~jšš
-        if (isJumping)
-        {
-            xSpeed *= 0.6f; // © 60%‚Ì—Í‚Éã‚ß‚éi’²®‰Â”\j
-        }
-
-        // Rigidbody ‚É‰¡‘¬“x‚ğ’¼ÚƒZƒbƒg
+        // -----------------------------
+        // â˜… ã‚ªãƒ¼ãƒˆã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ç§»å‹• â˜…
+        // -----------------------------
+        float xSpeed = isJumping ? moveSpeed * 0.6f : moveSpeed;
         rb.linearVelocity = new Vector2(xSpeed, rb.linearVelocity.y);
 
-        // ƒXƒy[ƒXƒL[‚ª‰Ÿ‚³‚êA‚©‚Â’n–Ê‚ÉÚ‚µ‚Ä‚¢‚éê‡‚Ì‚İƒWƒƒƒ“ƒv‚·‚é
+        // -----------------------------
+        // â˜… ã‚¸ãƒ£ãƒ³ãƒ—å‡¦ç†ï¼ˆAddForceç¦æ­¢ â†’ velocityåˆ¶å¾¡ï¼‰â˜…
+        // -----------------------------
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            isJumping = true; // © ƒWƒƒƒ“ƒvŠJn
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0); // —‰º’†‚Ì¨‚¢‚ğƒŠƒZƒbƒg
+            isJumping = true;           // ç©ºä¸­çŠ¶æ…‹ã«ã™ã‚‹ï¼ˆèª¤åˆ¤å®šé˜²æ­¢ï¼‰
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);  // è½ä¸‹ä¸­ã®å‹¢ã„ãƒªã‚»ãƒƒãƒˆ
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); // å®‰å®šã—ãŸã‚¸ãƒ£ãƒ³ãƒ—
+        }
 
-            // ã•ûŒü‚É—Í‚ğ‰Á‚¦‚ÄƒWƒƒƒ“ƒv
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        // ç€åœ°ã—ãŸã‚‰ã‚¸ãƒ£ãƒ³ãƒ—çŠ¶æ…‹è§£é™¤
+        if (isGrounded)
+        {
+            isJumping = false;
         }
     }
 
-    // ‰½‚©‚ÆÕ“Ë‚µ‚½uŠÔ‚ÉŒÄ‚Î‚ê‚éi2D •¨—j
+    // -----------------------------
+    // â˜… åœ°é¢åˆ¤å®šï¼ˆå£ã®æ¨ªã‚’èª¤åˆ¤å®šã—ãªã„ï¼‰â˜…
+    // -----------------------------
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Õ“Ë‚µ‚½ƒIƒuƒWƒFƒNƒg‚ªuGroundvƒŒƒCƒ„[‚¾‚Á‚½ê‡A’n–Ê‚ÉÚ’n‚µ‚Ä‚¢‚é‚Æ”»’è
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            isGrounded = true;
-            isJumping = false; // © ’n–Ê‚É‚Â‚¢‚½‚çƒWƒƒƒ“ƒv‰ğœ
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                // normal.y > 0.5 ï¼ ä¸Šã‹ã‚‰ä¹—ã£ãŸæ™‚ã ã‘æ¥åœ°ã¨åˆ¤å®š
+                if (contact.normal.y > 0.1f)
+                {
+                    isGrounded = true;
+                    return;
+                }
+            }
         }
     }
 
-    // Õ“Ë‚µ‚Ä‚¢‚½ƒIƒuƒWƒFƒNƒg‚©‚ç—£‚ê‚½uŠÔ‚ÉŒÄ‚Î‚ê‚éi2D •¨—j
     void OnCollisionExit2D(Collision2D collision)
     {
-        // —£‚ê‚½ƒIƒuƒWƒFƒNƒg‚ªuGroundvƒŒƒCƒ„[‚¾‚Á‚½ê‡AÚ’n‚µ‚Ä‚¢‚È‚¢‚Æ”»’è
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = false;

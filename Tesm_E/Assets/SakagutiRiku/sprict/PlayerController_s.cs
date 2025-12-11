@@ -6,47 +6,66 @@ using UnityEngine;
 public class PlayerController_s : MonoBehaviour
 {
     [Header("プレイヤーの移動設定")]
-    public float moveSpeed = 5f;   // 横移動の速さ
-    public float jumpForce = 5f;   // ジャンプ力（上方向への力）
+    public float moveSpeed = 5f;   // オートスクロール速度
+    public float jumpForce = 5f;   // ジャンプ力
 
-    private Rigidbody2D rb;        // プレイヤーの Rigidbody2D コンポーネント（物理演算に使用）
-    private bool isGrounded = false; // 地面に接しているかどうか（ジャンプ制御に使用）
+    private Rigidbody2D rb;
 
-    // ゲーム開始時に一度だけ呼ばれるメソッド
+    private bool isGrounded = false;  // 地面に接しているか
+    private bool isJumping = false;   // ジャンプ中かどうか
+
     void Start()
     {
-        // フレームレートを60FPSに固定
         Application.targetFrameRate = 60;
-
-        // Rigidbody2D コンポーネントを取得してキャッシュ
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // 毎フレーム呼ばれるメソッド
     void Update()
     {
-        // スペースキーが押され、かつ地面に接している場合のみジャンプする
+        // -----------------------------
+        // ★ オートスクロール移動 ★
+        // -----------------------------
+        float xSpeed = isJumping ? moveSpeed * 0.6f : moveSpeed;
+        rb.linearVelocity = new Vector2(xSpeed, rb.linearVelocity.y);
+
+        // -----------------------------
+        // ★ ジャンプ処理（AddForce禁止 → velocity制御）★
+        // -----------------------------
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            // 上方向に力を加えてジャンプ
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            isJumping = true;           // 空中状態にする（誤判定防止）
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);  // 落下中の勢いリセット
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); // 安定したジャンプ
+        }
+
+        // 着地したらジャンプ状態解除
+        if (isGrounded)
+        {
+            isJumping = false;
         }
     }
 
-    // 何かと衝突した瞬間に呼ばれる（2D 物理）
+    // -----------------------------
+    // ★ 地面判定（壁の横を誤判定しない）★
+    // -----------------------------
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // 衝突したオブジェクトが「Ground」レイヤーだった場合、地面に接地していると判定
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            isGrounded = true;
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                // normal.y > 0.5 ＝ 上から乗った時だけ接地と判定
+                if (contact.normal.y > 0.1f)
+                {
+                    isGrounded = true;
+                    return;
+                }
+            }
         }
     }
 
-    // 衝突していたオブジェクトから離れた瞬間に呼ばれる（2D 物理）
     void OnCollisionExit2D(Collision2D collision)
     {
-        // 離れたオブジェクトが「Ground」レイヤーだった場合、接地していないと判定
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = false;
