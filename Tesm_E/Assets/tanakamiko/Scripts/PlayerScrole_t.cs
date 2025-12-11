@@ -11,6 +11,7 @@ public class PlayerScrole_t : MonoBehaviour
 
     private Rigidbody2D rb;        // プレイヤーの Rigidbody2D コンポーネント（物理演算に使用）
     private bool isGrounded = false; // 地面に接しているかどうか（ジャンプ制御に使用）
+    private bool isJumping = false; // ← ジャンプ中かどうか管理
 
     // ゲーム開始時に一度だけ呼ばれるメソッド
     void Start()
@@ -25,9 +26,24 @@ public class PlayerScrole_t : MonoBehaviour
     // 毎フレーム呼ばれるメソッド
     void Update()
     {
+        // ★★ オートスクロール処理（常に右へ移動）★★
+        float xSpeed = moveSpeed;
+
+        // ★★ ジャンプ中は横押しを少し弱める（壁に吸い付くの防止）★★
+        if (isJumping)
+        {
+            xSpeed *= 0.6f; // ← 60%の力に弱める（調整可能）
+        }
+
+        // Rigidbody に横速度を直接セット
+        rb.linearVelocity = new Vector2(xSpeed, rb.linearVelocity.y);
+
         // スペースキーが押され、かつ地面に接している場合のみジャンプする
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
+            isJumping = true; // ← ジャンプ開始
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0); // 落下中の勢いをリセット
+
             // 上方向に力を加えてジャンプ
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
@@ -40,6 +56,7 @@ public class PlayerScrole_t : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = true;
+            isJumping = false; // ← 地面についたらジャンプ解除
         }
     }
 

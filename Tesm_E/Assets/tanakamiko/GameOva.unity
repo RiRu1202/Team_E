@@ -1344,6 +1344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonSound: {fileID: 8300000, guid: 8f7cb73d4f4be474a96c81b13a23e7f3, type: 3}
+  errorSound: {fileID: 8300000, guid: 0bb629b4d2f5af94fb04031c8e1cb350, type: 3}
 --- !u!1 &1456348919
 GameObject:
   m_ObjectHideFlags: 0

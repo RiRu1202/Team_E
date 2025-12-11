@@ -4,10 +4,11 @@ using System.Collections;
 
 public class SaveLoadManager_t : MonoBehaviour
 {
-    //ボタン効果音
-    public AudioClip buttonSound;
+    public AudioClip buttonSound;   // 成功時
+    public AudioClip errorSound;    // 失敗時（進行不可）
+
     private AudioSource audioSource;
-    private bool isMoving = false; // 連打防止ロック
+    private bool isMoving = false;
 
     void Awake()
     {
@@ -18,60 +19,66 @@ public class SaveLoadManager_t : MonoBehaviour
         }
     }
 
-    // 効果音→待機→シーン移動コルーチン
     IEnumerator PlaySoundThenLoad(string sceneName)
     {
         isMoving = true;
-        isMoving = true;
+
         if (buttonSound != null)
         {
             audioSource.PlayOneShot(buttonSound);
             yield return new WaitForSeconds(buttonSound.length);
         }
+
         SceneManager.LoadScene(sceneName);
         isMoving = false;
     }
 
-    // =========================
-    // Continueボタン処理
-    // =========================
+    void PlayErrorSound()
+    {
+        if (errorSound != null)
+            audioSource.PlayOneShot(errorSound);
+    }
+
+    // ============================
+    // 🎯 Continue ボタン
+    // ============================
     public void OnContinueButtonPressed()
     {
         if (isMoving) return;
 
         string saved = PlayerPrefs.GetString("SavedScene", "");
 
-        // 何もセーブされていない場合
         if (string.IsNullOrEmpty(saved))
         {
-            if (buttonSound != null) audioSource.PlayOneShot(buttonSound);
+            PlayErrorSound();
             Debug.Log("セーブデータがありません");
             return;
         }
 
-        // ⭐ クリアしていないステージへは行かせないチェック
+        // ❌ Stage1未クリア → Stage2に行かせない
         if (saved == "test_nisimoto" && PlayerPrefs.GetInt("ClearedStage1", 0) == 0)
         {
-            Debug.Log("Stage1未クリアなので Stage2には進めません");
-            if (buttonSound != null) audioSource.PlayOneShot(buttonSound);
+            PlayErrorSound();
+            Debug.Log("Stage1未クリアのため Stage2へ進めません");
             return;
         }
 
+        // ❌ Stage2未クリア → ラストに行かせない
         if (saved == "Test_tanaka" && PlayerPrefs.GetInt("ClearedStage2", 0) == 0)
         {
+            PlayErrorSound();
             Debug.Log("Stage2未クリアのため LastStageへ進めません");
-            if (buttonSound != null) audioSource.PlayOneShot(buttonSound);
             return;
         }
 
-        // 🎯 問題なければ効果音 → 待機 → シーン移動
+        // 🎯 進行可能
         StartCoroutine(PlaySoundThenLoad(saved));
-        Debug.Log("Continue → " + saved + " へ");
+        Debug.Log("Continue → " + saved);
     }
 
-    // =========================
-    // 次のシーンへボタン処理
-    // =========================
+    // ============================
+    // 🎯 Next ボタン（Clear 画面）
+    // ============================
     public void OnNextSceneButtonPressed()
     {
         if (isMoving) return;
@@ -80,49 +87,40 @@ public class SaveLoadManager_t : MonoBehaviour
 
         if (now == "Clear")
         {
-            //Stage1だけクリア済 → Stage2へ
+            // Stage1クリア済 → Stage2へ
             if (PlayerPrefs.GetInt("ClearedStage1", 0) == 1 &&
                 PlayerPrefs.GetInt("ClearedStage2", 0) == 0)
             {
-                SaveScene("test_nisimoto"); // 次の復帰先を保存
+                SaveScene("test_nisimoto");
                 StartCoroutine(PlaySoundThenLoad("test_nisimoto"));
-                Debug.Log("Clear → test_nisimoto へ");
                 return;
             }
 
-            //Stage2もクリア済 → ラストステージへ
+            // Stage2クリア済 → ラストへ
             if (PlayerPrefs.GetInt("ClearedStage2", 0) == 1)
             {
                 SaveScene("Test_tanaka");
                 StartCoroutine(PlaySoundThenLoad("Test_tanaka"));
-                Debug.Log("Clear → Test_tanaka へ");
                 return;
             }
 
-            //ラストクリア済 → タイトルへ戻る
-            if (PlayerPrefs.GetString("SavedScene", "") == "Test_tanaka")
-            {
-                SaveScene("Title");
-                StartCoroutine(PlaySoundThenLoad("Title"));
-                Debug.Log("Clear → Title へ戻る");
-                return;
-            }
-
-            // どの条件에도合わない → タイトルへ
-            StartCoroutine(PlaySoundThenLoad("Title"));
+            // 条件外 → エラー音
+            PlayErrorSound();
+            Debug.Log("進行条件を満たしていません");
             return;
         }
 
-        //タイトルで Next 押す → 何も起きない
+        // Title からは次へ不可
         if (now == "Title")
         {
+            PlayErrorSound();
             Debug.Log("タイトル画面では次へは無効です");
         }
     }
 
-    // =========================
-    //シーン名だけ保存
-    // =========================
+    // ============================
+    // 保存関数
+    // ============================
     public void SaveScene(string sceneName)
     {
         PlayerPrefs.SetString("SavedScene", sceneName);
