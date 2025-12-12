@@ -1,9 +1,9 @@
 using UnityEngine;
 
-/// <summary>
-/// 2D プレイヤーの移動とジャンプを制御するスクリプト（オートスクロール）
-/// 壁に引っかかりにくいよう調整済み
-/// </summary>
+// <summary>
+// 2D プレイヤーの移動とジャンプを制御するスクリプト（オートスクロール）
+// 壁に引っかかりにくいよう調整済み
+// </summary>
 public class PlayerScrole_t : MonoBehaviour
 {
     [Header("プレイヤーの移動設定")]
