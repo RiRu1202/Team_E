@@ -2728,8 +2728,8 @@ Transform:
   m_GameObject: {fileID: 422433113}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.64, y: -4.28, z: 9.82}
-  m_LocalScale: {x: 0.45, y: 0.45, z: 1}
+  m_LocalPosition: {x: -7.6400146, y: -4.280014, z: 9.82}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1171131865}
@@ -3353,10 +3353,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa925306ff8ecdc41b97e09f5f2b38f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objPrefab: {fileID: 732449924}
-  delayTime: 4
+  firePrefab: {fileID: 732449924}
+  cooldown: 5
   fireSpeed: 15
-  targetUITagName: Fire_Frag
+  playerGate: {fileID: 1023246025}
+  targetTag: Fire_Frag
+  cardTransform: {fileID: 1359092491}
+  cardRenderer: {fileID: 1359092493}
+  normalScale: {x: 0.5, y: 0.5, z: 1}
+  pressedScale: {x: 0.4, y: 0.4, z: 1}
+  pressDuration: 0.1
+  readyColor: {r: 1, g: 1, b: 1, a: 1}
+  cooldownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &595586154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3388,11 +3396,17 @@ MonoBehaviour:
   blockLayer:
     serializedVersion: 2
     m_Bits: 0
-  shiftDistance: 7
-  targetObjectName: Rock_Frag
+  shiftDistance: 5
   playerGateName: playergate
-  spawnOffset: 5
+  spawnOffset: 7
   cooldownTime: 5
+  cardTransform: {fileID: 422433114}
+  cardRenderer: {fileID: 422433116}
+  normalScale: {x: 0.5, y: 0.5, z: 1}
+  pressedScale: {x: 0.4, y: 0.4, z: 1}
+  pressDuration: 0.1
+  readyColor: {r: 1, g: 1, b: 1, a: 1}
+  cooldownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &595586156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3476,7 +3490,13 @@ MonoBehaviour:
   objPrefab: {fileID: 95803978}
   delayTime: 15
   fireSpeed: 15
-  targetUIButtonName: Water_Frag
+  cardTransform: {fileID: 1723909796}
+  cardRenderer: {fileID: 1723909798}
+  normalScale: {x: 0.5, y: 0.5, z: 1}
+  pressedScale: {x: 0.4, y: 0.4, z: 1}
+  pressDuration: 0.1
+  readyColor: {r: 1, g: 1, b: 1, a: 1}
+  cooldownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &595586162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6840,8 +6860,8 @@ Transform:
   m_GameObject: {fileID: 1359092490}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.34, y: -4.28, z: 9.85}
-  m_LocalScale: {x: 0.45, y: 0.45, z: 1}
+  m_LocalPosition: {x: -9.339996, y: -4.280014, z: 9.85}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1171131865}
@@ -18263,8 +18283,8 @@ Transform:
   m_GameObject: {fileID: 1723909795}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.8, y: -4.25, z: 9.82}
-  m_LocalScale: {x: 0.45, y: 0.45, z: 1}
+  m_LocalPosition: {x: -5.799988, y: -4.25, z: 9.82}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1171131865}
@@ -18908,7 +18928,6 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 2084453031}
   - {fileID: 355225021}
   - {fileID: 173028251}
   - {fileID: 443760655}
@@ -18947,3 +18966,4 @@ SceneRoots:
   - {fileID: 1118508361}
   - {fileID: 1301002507}
   - {fileID: 1182727722}
+  - {fileID: 2084453031}

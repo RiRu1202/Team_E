@@ -1,82 +1,90 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
-using System.Collections;  // ← 必須！！
+using System.Collections;
 using System.Collections.Generic;
 
-public class RockController : MonoBehaviour
+public class RockController_p : MonoBehaviour
 {
     public GameObject rockPrefab;
     public Vector2 checkBoxSize = new Vector2(1f, 1f);
     public LayerMask blockLayer;
     public float shiftDistance = 1.0f;
-    public string targetObjectName = "RockButton";
     public string playerGateName = "PlayerGate";
     public float spawnOffset = 3f;
 
     [Header("クールタイム設定")]
-    public float cooldownTime = 1.5f;  // クールタイム秒
-    private bool isOnCooldown = false; // クールタイム中？
+    public float cooldownTime = 1.5f;
+    private bool isOnCooldown = false;
+
+    // ===== ここから追加 =====
+    [Header("札（Canvasなし）演出用")]
+    public Transform cardTransform;
+    public SpriteRenderer cardRenderer;
+
+    public Vector3 normalScale = new Vector3(0.8f, 0.8f, 1f);
+    public Vector3 pressedScale = new Vector3(0.7f, 0.7f, 1f);
+    public float pressDuration = 0.1f;
+
+    public Color readyColor = Color.white;
+    public Color cooldownColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+
+    private bool isPressing = false;
+    // ===== 追加ここまで =====
+
+    void Start()
+    {
+        // ★追加
+        if (cardTransform != null)
+            cardTransform.localScale = normalScale;
+    }
 
     void Update()
     {
+        // ★追加：クールタイム表示
+        if (cardRenderer != null)
+        {
+            cardRenderer.color =
+                isOnCooldown ? cooldownColor : readyColor;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
-            if (IsClickedTarget(targetObjectName))
+            if (IsClickedTarget())
             {
-                // クールタイム中なら生成しない
                 if (isOnCooldown)
-                {
-                    Debug.Log("クールタイム中！岩は生成されません。");
                     return;
-                }
 
                 GameObject gate = GameObject.Find(playerGateName);
                 if (gate != null)
                 {
-                    Vector2 spawnPos = (Vector2)gate.transform.position + Vector2.right * spawnOffset;
+                    Vector2 spawnPos =
+                        (Vector2)gate.transform.position + Vector2.right * spawnOffset;
+
                     TrySpawnRock(spawnPos);
 
-                    // クールタイム開始
+                    // ★追加：押し込み演出
+                    StartCoroutine(PressEffect());
+
                     StartCoroutine(StartCooldown());
-                }
-                else
-                {
-                    Debug.LogError("PlayerGateが見つかりません！");
                 }
             }
         }
     }
 
-    // クールタイム開始
     private IEnumerator StartCooldown()
     {
         isOnCooldown = true;
         yield return new WaitForSeconds(cooldownTime);
         isOnCooldown = false;
-        Debug.Log("クールタイム終了！");
     }
 
-    // クリックしたオブジェクトが targetName かどうか判定
-    private bool IsClickedTarget(string targetName)
+    private bool IsClickedTarget()
     {
-        PointerEventData pointer = new PointerEventData(EventSystem.current)
-        {
-            position = Input.mousePosition
-        };
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
 
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointer, results);
-
-        foreach (RaycastResult r in results)
-        {
-            if (r.gameObject.name == targetName)
-                return true;
-        }
-
-        return false;
+        return hit.collider != null && hit.collider.CompareTag("Rock_Frag");
     }
 
-    // 指定位置から岩を生成、ブロックがあれば左にずらす
     public void TrySpawnRock(Vector2 startPos)
     {
         Vector2 pos = startPos;
@@ -88,22 +96,23 @@ public class RockController : MonoBehaviour
             if (hit == null)
             {
                 Instantiate(rockPrefab, pos, Quaternion.identity);
-                Debug.Log($"岩を {i} 回左にずらして生成しました。位置: {pos}");
                 return;
             }
 
             pos += Vector2.left * shiftDistance;
         }
-
-        Debug.LogWarning("空いている場所が見つかりませんでした。岩を生成しません。");
     }
 
-    // Sceneビューで判定範囲を見えるようにする
-    private void OnDrawGizmosSelected()
+    // ★追加：押し込み演出
+    IEnumerator PressEffect()
     {
-        Gizmos.color = Color.red;
-        GameObject gate = GameObject.Find(playerGateName);
-        if (gate != null)
-            Gizmos.DrawWireCube((Vector2)gate.transform.position + Vector2.right * spawnOffset, checkBoxSize);
+        if (isPressing) yield break;
+        isPressing = true;
+
+        cardTransform.localScale = pressedScale;
+        yield return new WaitForSeconds(pressDuration * 0.5f);
+        cardTransform.localScale = normalScale;
+
+        isPressing = false;
     }
 }

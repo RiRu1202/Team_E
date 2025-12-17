@@ -46,18 +46,4 @@ public class PlayerController1_t : MonoBehaviour
         Debug.Log("ゲームオーバー！");
         SceneManager.LoadScene("GameOva"); // シーン名を正しく修正
     }
-
-    // ゴール判定
-    /*void OnTriggerEnter2D(Collider2D other)
-    {
-        // 触れた相手が "Goal" タグの場合のみ反応
-        if (other.CompareTag("Goal"))
-        {
-            // カメラ停止などに使うゲーム状態を変更
-            CameraController.gameState = "clear";
-
-            // "Clear" シーンに切り替え
-            SceneManager.LoadScene("Clear");
-        }
-    }*/
 }

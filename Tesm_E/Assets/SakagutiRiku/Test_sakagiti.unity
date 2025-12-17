@@ -2998,10 +2998,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94352af8ff9dae34882b8d56fe0d33c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objPrefab: {fileID: 2076275846}
-  delayTime: 10
+  firePrefab: {fileID: 2076275846}
+  cooldown: 5
   fireSpeed: 15
-  targetUIButtonName: Fire_Frag
+  playerGate: {fileID: 404615960}
+  targetTag: Fire_Frag
+  cardTransform: {fileID: 1950931418}
+  cardRenderer: {fileID: 1950931417}
+  normalScale: {x: 0.45, y: 0.45, z: 1}
+  pressedScale: {x: 0.35, y: 0.35, z: 1}
+  pressDuration: 0.1
+  readyColor: {r: 1, g: 1, b: 1, a: 1}
+  cooldownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &1177771288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3019,11 +3027,17 @@ MonoBehaviour:
   blockLayer:
     serializedVersion: 2
     m_Bits: 0
-  shiftDistance: 1
-  targetObjectName: Rock_Frag
+  shiftDistance: 5
   playerGateName: playergate
   spawnOffset: 7
   cooldownTime: 5
+  cardTransform: {fileID: 2036062674}
+  cardRenderer: {fileID: 2036062673}
+  normalScale: {x: 0.45, y: 0.45, z: 1}
+  pressedScale: {x: 0.35, y: 0.35, z: 1}
+  pressDuration: 0.1
+  readyColor: {r: 1, g: 1, b: 1, a: 1}
+  cooldownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!95 &1177771289
 Animator:
   serializedVersion: 7

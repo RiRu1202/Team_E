@@ -14,10 +14,29 @@ public class Water_Controller_t : MonoBehaviour
     private Transform gateTransform;
     private float passedTime = 0f;
 
+    // ===== ここから追加 =====
+    [Header("札（Canvasなし）演出用")]
+    public Transform cardTransform;
+    public SpriteRenderer cardRenderer;
+
+    public Vector3 normalScale = new Vector3(0.8f, 0.8f, 1f);
+    public Vector3 pressedScale = new Vector3(0.7f, 0.7f, 1f);
+    public float pressDuration = 0.1f;
+
+    public Color readyColor = Color.white;
+    public Color cooldownColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+
+    private bool isPressing = false;
+    // ===== 追加ここまで =====
+
     void Start()
     {
         gateTransform = transform.Find("playergate");
         passedTime = delayTime;
+
+        // ★追加
+        if (cardTransform != null)
+            cardTransform.localScale = normalScale;
     }
 
     void Update()
@@ -25,6 +44,13 @@ public class Water_Controller_t : MonoBehaviour
         if (objPrefab == null) return;
 
         passedTime += Time.deltaTime;
+
+        // ★追加：クールタイム表示
+        if (cardRenderer != null)
+        {
+            cardRenderer.color =
+                passedTime >= delayTime ? readyColor : cooldownColor;
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -34,6 +60,10 @@ public class Water_Controller_t : MonoBehaviour
                 if (passedTime >= delayTime)
                 {
                     Water();
+
+                    // ★追加：押し込み演出
+                    StartCoroutine(PressEffect());
+
                     passedTime = 0f;
                 }
             }
@@ -45,7 +75,7 @@ public class Water_Controller_t : MonoBehaviour
     /// </summary>
     private bool IsClickedWaterFrag()
     {
-        // ▼ UI（Canvas上のUIボタンなど）のタグチェック
+        // UI判定
         PointerEventData pointerData = new PointerEventData(EventSystem.current);
         pointerData.position = Input.mousePosition;
 
@@ -55,21 +85,14 @@ public class Water_Controller_t : MonoBehaviour
         foreach (RaycastResult result in results)
         {
             if (result.gameObject.CompareTag("Water_Frag"))
-            {
                 return true;
-            }
         }
 
-        // ▼ 2D物理 Raycast（シーン上の2Dオブジェクト用）
+        // 2D物理 Raycast
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
 
-        if (hit.collider != null && hit.collider.CompareTag("Water_Frag"))
-        {
-            return true;
-        }
-
-        return false;
+        return hit.collider != null && hit.collider.CompareTag("Water_Frag");
     }
 
     /// <summary>
@@ -88,5 +111,18 @@ public class Water_Controller_t : MonoBehaviour
             Vector2 dir = gateTransform.right;
             rbody.AddForce(dir * fireSpeed, ForceMode2D.Impulse);
         }
+    }
+
+    // ★追加：押し込み演出
+    IEnumerator PressEffect()
+    {
+        if (isPressing) yield break;
+        isPressing = true;
+
+        cardTransform.localScale = pressedScale;
+        yield return new WaitForSeconds(pressDuration * 0.5f);
+        cardTransform.localScale = normalScale;
+
+        isPressing = false;
     }
 }

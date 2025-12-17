@@ -3,105 +3,126 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-/// <summary>
-/// マウスクリックで特定のUIボタン（例：Fire_Frag）が押されたとき、
-/// プレイヤーの「発射口（playergate）」から弾（objPrefab）を発射するスクリプト。
-/// 最初の1発はすぐに発射可能で、その後はクールタイム(delayTime)が発生する。
-/// </summary>
 public class Water_Controller_n : MonoBehaviour
 {
     [Header("発射設定")]
-    public GameObject objPrefab;         // 発射するオブジェクト（例：弾、火球など）のプレハブ
-    public float delayTime = 1f;         // 発射間隔（秒）
-    public float fireSpeed = 4.0f;       // 弾を飛ばす速度（力の大きさ）
+    public GameObject objPrefab;
+    public float delayTime = 1f;
+    public float fireSpeed = 4.0f;
 
-    [Header("UI設定")]
-    public string targetUIButtonName = "Water_Frag"; // 発射をトリガーするUIボタンの名前
+    // 子オブジェクト "playergate"
+    private Transform gateTransform;
+    private float passedTime = 0f;
 
-    private Transform gateTransform;     // 弾の発射位置（子オブジェクト "playergate" のTransform）
-    private float passedTime = 0f;       // 前回の発射から経過した時間
+    // ===== ここから追加 =====
+    [Header("札（Canvasなし）演出用")]
+    public Transform cardTransform;
+    public SpriteRenderer cardRenderer;
 
-    // ゲーム開始時に1度だけ呼ばれる
+    public Vector3 normalScale = new Vector3(0.8f, 0.8f, 1f);
+    public Vector3 pressedScale = new Vector3(0.7f, 0.7f, 1f);
+    public float pressDuration = 0.1f;
+
+    public Color readyColor = Color.white;
+    public Color cooldownColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+
+    private bool isPressing = false;
+    // ===== 追加ここまで =====
+
     void Start()
     {
-        // 子オブジェクト "playergate" を探してキャッシュ
         gateTransform = transform.Find("playergate");
-
-        // 最初の一発をすぐに撃てるように、経過時間をdelayTimeで初期化
         passedTime = delayTime;
+
+        // ★追加
+        if (cardTransform != null)
+            cardTransform.localScale = normalScale;
     }
 
-    // 毎フレーム呼ばれる
     void Update()
     {
-        // 発射するオブジェクト（プレハブ）が設定されていない場合は何もしない
         if (objPrefab == null) return;
 
-        // 経過時間を加算（発射間隔の管理に使用）
         passedTime += Time.deltaTime;
 
-        // マウスの左クリックが押された瞬間
+        // ★追加：クールタイム表示
+        if (cardRenderer != null)
+        {
+            cardRenderer.color =
+                passedTime >= delayTime ? readyColor : cooldownColor;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
-            // 指定したUI（targetUIButtonName）がクリックされたかチェック
-            if (IsClickedUI(targetUIButtonName))
+            // タグ Water_Frag をクリックしたとき
+            if (IsClickedWaterFrag())
             {
-                // 一定の発射間隔（delayTime）が経過していたら発射
                 if (passedTime >= delayTime)
                 {
-                    Water();          // 弾を発射
-                    passedTime = 0f; // 経過時間をリセット
+                    Water();
+
+                    // ★追加：押し込み演出
+                    StartCoroutine(PressEffect());
+
+                    passedTime = 0f;
                 }
             }
         }
     }
 
     /// <summary>
-    /// 指定したUI要素がクリックされたかどうかを判定するメソッド
+    /// クリック対象が Water_Frag タグを持っているか判定（UI or 2D どちらでもOK）
     /// </summary>
-    private bool IsClickedUI(string targetUIName)
+    private bool IsClickedWaterFrag()
     {
-        // 現在のマウス位置からUI上のクリック判定を作成
+        // UI判定
         PointerEventData pointerData = new PointerEventData(EventSystem.current);
         pointerData.position = Input.mousePosition;
 
-        // クリック位置にある全てのUI要素を取得
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerData, results);
 
-        // クリックされたUIの中に指定の名前があるかチェック
         foreach (RaycastResult result in results)
         {
-            if (result.gameObject.name == targetUIName)
-            {
-                return true; // 指定したUIがクリックされていた
-            }
+            if (result.gameObject.CompareTag("Water_Frag"))
+                return true;
         }
 
-        return false; // 該当UIがクリックされていない
+        // 2D物理 Raycast
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+        return hit.collider != null && hit.collider.CompareTag("Water_Frag");
     }
 
     /// <summary>
-    /// 弾（objPrefab）を生成して、前方向（playergate の右方向）に発射する
+    /// 弾を発射
     /// </summary>
     public void Water()
     {
-        // 発射位置が設定されていない場合は何もしない
         if (gateTransform == null) return;
 
-        // 弾の生成位置を取得（playergate の位置）
         Vector2 pos = gateTransform.position;
-
-        // 弾プレハブを生成
         GameObject obj = Instantiate(objPrefab, pos, Quaternion.identity);
 
-        // 弾に Rigidbody2D がついていれば力を加えて発射
         Rigidbody2D rbody = obj.GetComponent<Rigidbody2D>();
         if (rbody != null)
         {
-            // playergate の「右方向」に向かって発射
             Vector2 dir = gateTransform.right;
             rbody.AddForce(dir * fireSpeed, ForceMode2D.Impulse);
         }
+    }
+
+    // ★追加：押し込み演出
+    IEnumerator PressEffect()
+    {
+        if (isPressing) yield break;
+        isPressing = true;
+
+        cardTransform.localScale = pressedScale;
+        yield return new WaitForSeconds(pressDuration * 0.5f);
+        cardTransform.localScale = normalScale;
+
+        isPressing = false;
     }
 }

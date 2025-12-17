@@ -1,97 +1,78 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-/// <summary>
-/// マウスクリックで特定のUIボタン（例：Fire_Frag）が押されたとき、
-/// プレイヤーの「発射口（playergate）」から弾（objPrefab）を発射するスクリプト。
-/// 最初の1発はすぐに発射可能で、その後はクールタイム(delayTime)が発生する。
-/// </summary>
 public class FireController_n : MonoBehaviour
 {
     [Header("発射設定")]
-    public GameObject objPrefab;   // 発射する弾
-    public float delayTime = 1f;   // 発射間隔
-    public float fireSpeed = 4f;   // 弾の速度
+    public GameObject firePrefab;
+    public float cooldown = 1f;
+    public float fireSpeed = 4f;
+    public Transform playerGate;
 
-    [Header("発射対象タグ")]
-    public string targetUITagName = "Fire_Frag";  // ← クリック対象のタグ
+    [Header("札設定（Canvasなし）")]
+    public string targetTag = "Fire_Frag";
+    public Transform cardTransform;
+    public SpriteRenderer cardRenderer;
 
-    private Transform gateTransform;     // 発射位置（playergate）
-    private float passedTime = 0f;
+    [Header("札サイズ")]
+    public Vector3 normalScale = new Vector3(0.8f, 0.8f, 1f);
+    public Vector3 pressedScale = new Vector3(0.7f, 0.7f, 1f);
+    public float pressDuration = 0.1f;
+
+    [Header("色")]
+    public Color readyColor = Color.white;
+    public Color cooldownColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+
+    float timer;
+    bool isPressing;
 
     void Start()
     {
-        // Playergate を取得（このスクリプトをPlayerに付ける前提）
-        gateTransform = transform.Find("playergate");
-
-        passedTime = delayTime;
+        timer = cooldown;
+        cardTransform.localScale = normalScale;
+        cardRenderer.color = readyColor;
     }
 
     void Update()
     {
-        // マウス位置をワールド座標に変換
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        timer += Time.deltaTime;
+        UpdateColor();
 
-        // 2D用のレイキャスト（Z方向ではなくXY平面）
-        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-        if (objPrefab == null) return;
+        if (!Input.GetMouseButtonDown(0)) return;
+        if (!IsClicked()) return;
+        if (timer < cooldown || isPressing) return;
 
-        passedTime += Time.deltaTime;
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (hit.collider != null && hit.collider.CompareTag("Fire_Frag"))
-            {
-                if (passedTime >= delayTime)
-                {
-                    Fire();
-                    passedTime = 0f;
-                }
-            }
-        }
+        StartCoroutine(Press());
+        Shoot();
+        timer = 0f;
     }
 
-    /// <summary>
-    /// クリックされたUIの中に tag が一致するものがあるか判定
-    /// </summary>
-    private bool IsClickedUIByTag(string targetTag)
+    bool IsClicked()
     {
-        PointerEventData pointerData = new PointerEventData(EventSystem.current);
-        pointerData.position = Input.mousePosition;
-
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerData, results);
-
-        foreach (RaycastResult result in results)
-        {
-            // ★タグで判定するように変更↓
-            if (result.gameObject.CompareTag(targetTag))
-            {
-                return true;
-            }
-        }
-
-        return false;
+        Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
+        return hit.collider != null && hit.collider.CompareTag(targetTag);
     }
 
-    /// <summary>
-    /// Playergate から弾を発射
-    /// </summary>
-    private void Fire()
+    IEnumerator Press()
     {
-        if (gateTransform == null) return;
+        isPressing = true;
+        cardTransform.localScale = pressedScale;
+        yield return new WaitForSeconds(pressDuration * 0.5f);
+        cardTransform.localScale = normalScale;
+        isPressing = false;
+    }
 
-        Vector2 pos = gateTransform.position;
+    void UpdateColor()
+    {
+        cardRenderer.color = timer >= cooldown ? readyColor : cooldownColor;
+    }
 
-        GameObject obj = Instantiate(objPrefab, pos, Quaternion.identity);
-
-        Rigidbody2D rbody = obj.GetComponent<Rigidbody2D>();
-        if (rbody != null)
-        {
-            Vector2 dir = gateTransform.right;
-            rbody.AddForce(dir * fireSpeed, ForceMode2D.Impulse);
-        }
+    void Shoot()
+    {
+        GameObject obj = Instantiate(firePrefab, playerGate.position, Quaternion.identity);
+        Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+        if (rb != null)
+            rb.AddForce(playerGate.right * fireSpeed, ForceMode2D.Impulse);
     }
 }

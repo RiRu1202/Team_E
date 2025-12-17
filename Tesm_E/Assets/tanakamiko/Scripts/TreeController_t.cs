@@ -1,110 +1,147 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 /// <summary>
 /// Tree_Frag をクリックしたら木を生成する
-/// FireController と同じ「時間経過方式のクールタイム」
-/// 最初の1回のみクールタイムなし
+/// Canvasなし（ワールド配置の札）対応版
+/// ・最初の1回のみクールタイムなし
+/// ・押し込み演出（Scale変更）
+/// ・クールタイム中は暗く表示
 /// </summary>
 public class TreeController_t : MonoBehaviour
 {
     [Header("木生成設定")]
-    public GameObject treePrefab;      // 生成する木のプレハブ
-    public float cooldown = 0.5f;      // クールタイム
-    public float spawnDistance = 5f;   // playerGate から5マス先
+    public GameObject treePrefab;
+    public float cooldown = 0.5f;
+    public float spawnDistance = 5f;
 
     [Header("成長設定")]
-    public float growHeight = 3.5f;    // 木の最終高さ
-    public float growTime = 0.5f;      // 成長にかかる時間
-    public float treeWidth = 2f;       // 木の横幅
+    public float growHeight = 3.5f;
+    public float growTime = 0.5f;
+    public float treeWidth = 2f;
 
     [Header("プレイヤー設定")]
-    public Transform playerGate;       // 木を出す位置
-    public LayerMask groundLayer;      // 地面レイヤー
+    public Transform playerGate;
+    public LayerMask groundLayer;
 
-    private float passedTime = 0f;     // 経過時間
-    private bool firstUse = true;      // 最初の1回だけクールタイムなし
+    [Header("札（Canvasなし）設定")]
+    public string targetTag = "Tree_Frag";
+    public Transform cardTransform;          // ★ Transform
+    public SpriteRenderer cardRenderer;      // ★ 見た目
+
+    [Header("札サイズ設定")]
+    public Vector3 normalScale = new Vector3(0.8f, 0.8f, 1f);
+    public Vector3 pressedScale = new Vector3(0.7f, 0.7f, 1f);
+    public float pressDuration = 0.1f;
+
+    [Header("色設定")]
+    public Color readyColor = Color.white;
+    public Color cooldownColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+
+    private float passedTime = 0f;
+    private bool firstUse = true;
+    private bool isPressing = false;
 
     void Start()
     {
-        // 最初の1回はすぐ発動できるように…後で firstUse で制御する
         passedTime = cooldown;
+
+        if (cardTransform != null)
+            cardTransform.localScale = normalScale;
+
+        if (cardRenderer != null)
+            cardRenderer.color = readyColor;
     }
 
     void Update()
     {
-        // 経過時間を加算
         passedTime += Time.deltaTime;
+        UpdateCardColor();
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (IsClickedTreeFrag())
-            {
-                TrySpawnTree();
-            }
-        }
-    }
+        if (!Input.GetMouseButtonDown(0)) return;
 
-    // Tree_Frag タグがクリックされたか判定
-    private bool IsClickedTreeFrag()
-    {
-        // UI判定
-        PointerEventData pointerData = new PointerEventData(EventSystem.current);
-        pointerData.position = Input.mousePosition;
+        if (!IsClickedTreeFrag()) return;
+        if (isPressing) return;
 
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerData, results);
-
-        foreach (RaycastResult r in results)
-        {
-            if (r.gameObject.CompareTag("Tree_Frag"))
-                return true;
-        }
-
-        // 2Dオブジェクト判定
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-
-        if (hit.collider != null && hit.collider.CompareTag("Tree_Frag"))
-            return true;
-
-        return false;
-    }
-
-    private void TrySpawnTree()
-    {
-        if (playerGate == null) return;
-
-        // 最初の1回はクールタイム無視して OK
         if (firstUse)
         {
+            StartCoroutine(PressEffect());
             SpawnTreeNow();
             firstUse = false;
             passedTime = 0f;
             return;
         }
 
-        // クールタイム方式（FireControllerと同じ）
         if (passedTime >= cooldown)
         {
+            StartCoroutine(PressEffect());
             SpawnTreeNow();
             passedTime = 0f;
         }
     }
 
+    //==============================
+    // クリック判定（2D Raycast）
+    //==============================
+    private bool IsClickedTreeFrag()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+        return hit.collider != null && hit.collider.CompareTag(targetTag);
+    }
+
+    //==============================
+    // 押し込み演出
+    //==============================
+    private IEnumerator PressEffect()
+    {
+        isPressing = true;
+
+        cardTransform.localScale = pressedScale;
+        yield return new WaitForSeconds(pressDuration * 0.5f);
+        cardTransform.localScale = normalScale;
+
+        isPressing = false;
+    }
+
+    //==============================
+    // クールタイム中の色変更
+    //==============================
+    private void UpdateCardColor()
+    {
+        if (cardRenderer == null) return;
+
+        if (firstUse)
+        {
+            cardRenderer.color = readyColor;
+            return;
+        }
+
+        cardRenderer.color =
+            passedTime >= cooldown ? readyColor : cooldownColor;
+    }
+
+    //==============================
+    // 木生成処理
+    //==============================
     private void SpawnTreeNow()
     {
-        // playerGate の向き
+        if (playerGate == null) return;
+
         float dir = playerGate.localScale.x > 0 ? 1 : -1;
 
-        Vector3 rayStart = playerGate.position + new Vector3(spawnDistance * dir, 5f, 0f);
-        RaycastHit2D hit = Physics2D.Raycast(rayStart, Vector2.down, 10f, groundLayer);
+        Vector3 rayStart =
+            playerGate.position + new Vector3(spawnDistance * dir, 5f, 0f);
+
+        RaycastHit2D hit =
+            Physics2D.Raycast(rayStart, Vector2.down, 10f, groundLayer);
 
         if (hit.collider != null)
         {
-            GameObject tree = Instantiate(treePrefab, hit.point, Quaternion.identity);
+            GameObject tree =
+                Instantiate(treePrefab, hit.point, Quaternion.identity);
+
             StartCoroutine(GrowTree(tree.transform));
         }
         else
@@ -113,18 +150,21 @@ public class TreeController_t : MonoBehaviour
         }
     }
 
-    // 成長アニメーション
+    //==============================
+    // 木の成長アニメーション
+    //==============================
     private IEnumerator GrowTree(Transform tree)
     {
-        Vector3 startScale = new Vector3(treeWidth, 0.1f, 1);
-        Vector3 endScale = new Vector3(treeWidth, growHeight, 1);
+        Vector3 startScale = new Vector3(treeWidth, 0.1f, 1f);
+        Vector3 endScale = new Vector3(treeWidth, growHeight, 1f);
 
         float time = 0f;
         tree.localScale = startScale;
 
         while (time < growTime)
         {
-            tree.localScale = Vector3.Lerp(startScale, endScale, time / growTime);
+            tree.localScale =
+                Vector3.Lerp(startScale, endScale, time / growTime);
             time += Time.deltaTime;
             yield return null;
         }
