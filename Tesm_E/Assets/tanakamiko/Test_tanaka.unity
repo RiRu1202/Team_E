@@ -24296,7 +24296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePrefab: {fileID: 381974255}
-  cooldown: 5
+  cooldown: 10
   fireSpeed: 15
   playerGate: {fileID: 352866794}
   targetTag: Fire_Frag

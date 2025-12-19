@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class stagestartsave_t : MonoBehaviour
+public class stagestartsave_s : MonoBehaviour
 {
     void Start()
     {

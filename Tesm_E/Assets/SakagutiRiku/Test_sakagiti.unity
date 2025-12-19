@@ -2999,7 +2999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePrefab: {fileID: 2076275846}
-  cooldown: 5
+  cooldown: 10
   fireSpeed: 15
   playerGate: {fileID: 404615960}
   targetTag: Fire_Frag
@@ -16294,6 +16294,7 @@ GameObject:
   - component: {fileID: 2074511818}
   - component: {fileID: 2074511819}
   - component: {fileID: 2074511820}
+  - component: {fileID: 2074511821}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -16554,6 +16555,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2074511821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074511813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee5a668ed18af34aae0619159dc7da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2076275846 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 793371158912034063, guid: bb23833a6eff9cf4da38205ec2ef5e59, type: 3}

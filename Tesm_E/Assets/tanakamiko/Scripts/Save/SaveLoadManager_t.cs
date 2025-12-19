@@ -40,7 +40,7 @@ public class SaveLoadManager_t : MonoBehaviour
     }
 
     // ============================
-    // 🎯 Continue ボタン
+    // Continue ボタン
     // ============================
     public void OnContinueButtonPressed()
     {
@@ -55,7 +55,7 @@ public class SaveLoadManager_t : MonoBehaviour
             return;
         }
 
-        // ❌ Stage1未クリア → Stage2に行かせない
+        // Stage1未クリア → Stage2に行かせない
         if (saved == "test_nisimoto" && PlayerPrefs.GetInt("ClearedStage1", 0) == 0)
         {
             PlayErrorSound();
@@ -63,7 +63,7 @@ public class SaveLoadManager_t : MonoBehaviour
             return;
         }
 
-        // ❌ Stage2未クリア → ラストに行かせない
+        // Stage2未クリア → ラストに行かせない
         if (saved == "Test_tanaka" && PlayerPrefs.GetInt("ClearedStage2", 0) == 0)
         {
             PlayErrorSound();
@@ -71,7 +71,7 @@ public class SaveLoadManager_t : MonoBehaviour
             return;
         }
 
-        // 🎯 進行可能
+        //進行可能
         StartCoroutine(PlaySoundThenLoad(saved));
         Debug.Log("Continue → " + saved);
     }
