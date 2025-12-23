@@ -16,6 +16,7 @@ TagManager:
   - ground
   - Goal
   - Fire_tag
+  - oniDemo
   layers:
   - Default
   - TransparentFX

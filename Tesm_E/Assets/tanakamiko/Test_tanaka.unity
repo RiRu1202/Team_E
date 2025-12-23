@@ -314,7 +314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &280800755
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -989,7 +989,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &843191768
 Transform:
   m_ObjectHideFlags: 0
@@ -19798,7 +19798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1396611257
 Transform:
   m_ObjectHideFlags: 0
@@ -24175,7 +24175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treePrefab: {fileID: 1285644142}
   cooldown: 15
-  spawnDistance: 8
+  spawnDistance: 7
   growHeight: 3.5
   growTime: 0.5
   treeWidth: 5
