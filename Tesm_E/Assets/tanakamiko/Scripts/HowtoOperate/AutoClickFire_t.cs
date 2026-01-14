@@ -55,11 +55,11 @@ public class AutoClickFire_t : MonoBehaviour
             // 炎を発射
             fireController.Fire();
 
-            // ★鬼を即復活（消えた直後）
-            if (oniDemo != null)
-            {
-                oniDemo.SetActive(true);
-            }
+            //// ★鬼を即復活（消えた直後）
+            //if (oniDemo != null)
+            //{
+            //    oniDemo.SetActive(true);
+            //}
 
             // 次の発射まで待つ
             yield return new WaitForSeconds(interval);
