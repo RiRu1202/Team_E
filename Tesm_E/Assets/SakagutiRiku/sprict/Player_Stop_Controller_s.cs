@@ -43,10 +43,10 @@ public class Player_Stop_Controller_s : MonoBehaviour
 
         if (cameraController != null)
         {
-            Debug.Log("カメラ停止（0.3秒間）");
+            Debug.Log("カメラ停止（0.2秒間）");
             cameraController.isPaused = true;
 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.2f);
 
             cameraController.isPaused = false;
             Debug.Log("カメラ再開！");
