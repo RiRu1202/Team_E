@@ -38,9 +38,17 @@ public class TreeController_t : MonoBehaviour
     public Color readyColor = Color.white;
     public Color cooldownColor = new Color(0.5f, 0.5f, 0.5f, 1f);
 
+    [Header("デモ用：Goal基準で木を出す")]
+    public Transform demoGoal;          // ★DemoGoalを入れる
+    public float goalBackDistance = 6f; // ★6マス前
+
+
     private float passedTime = 0f;
     private bool firstUse = true;
     private bool isPressing = false;
+
+    public Transform demoParent;   // ★デモで生成した木を入れる親（TreeDemoRoot）
+
 
     void Start()
     {
@@ -129,18 +137,34 @@ public class TreeController_t : MonoBehaviour
     {
         if (playerGate == null) return;
 
-        float dir = playerGate.localScale.x > 0 ? 1 : -1;
+        float spawnX;
 
-        Vector3 rayStart =
-            playerGate.position + new Vector3(spawnDistance * dir, 5f, 0f);
+        if (demoGoal != null)
+        {
+            // ★DemoGoalの6マス前に固定
+            spawnX = demoGoal.position.x - goalBackDistance;
+        }
+        else
+        {
+            // 従来方式（保険）
+            float dir = playerGate.localScale.x > 0 ? 1 : -1;
+            spawnX = playerGate.position.x + (spawnDistance * dir);
+        }
+
+        // Ray開始位置（上から下へ地面探す）
+        Vector3 rayStart = new Vector3(spawnX, playerGate.position.y + 5f, 0f);
+
 
         RaycastHit2D hit =
             Physics2D.Raycast(rayStart, Vector2.down, 10f, groundLayer);
 
         if (hit.collider != null)
         {
-            GameObject tree =
-                Instantiate(treePrefab, hit.point, Quaternion.identity);
+            Transform parent = (demoParent != null) ? demoParent : null;
+            GameObject tree = Instantiate(treePrefab, hit.point, Quaternion.identity, parent);
+
+            //GameObject tree =
+            //    Instantiate(treePrefab, hit.point, Quaternion.identity, demoParent);
 
             StartCoroutine(GrowTree(tree.transform));
         }
@@ -171,4 +195,17 @@ public class TreeController_t : MonoBehaviour
 
         tree.localScale = endScale;
     }
+
+    //==============================
+    // ★ デモ用：外部から木生成を呼ぶ
+    //==============================
+    public void DemoSpawnTree()
+    {
+        // 押し込み演出やクールタイム処理は
+        // 外側（自動クリック側）でやるので
+        // ここは生成だけ
+        SpawnTreeNow();
+    }
+
 }
+

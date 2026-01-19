@@ -17,6 +17,8 @@ TagManager:
   - Goal
   - Fire_tag
   - oniDemo
+  - DemoGoal
+  - DemoJump
   layers:
   - Default
   - TransparentFX
