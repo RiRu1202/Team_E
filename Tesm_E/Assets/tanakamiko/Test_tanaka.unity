@@ -23796,11 +23796,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 35398117071295656, guid: 34e8e9f7682f51849b16727a97bcdab3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 122.27423
+      value: 122.2
       objectReference: {fileID: 0}
     - target: {fileID: 35398117071295656, guid: 34e8e9f7682f51849b16727a97bcdab3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.3540099
+      value: 2.28
       objectReference: {fileID: 0}
     - target: {fileID: 35398117071295656, guid: 34e8e9f7682f51849b16727a97bcdab3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -24244,6 +24244,9 @@ MonoBehaviour:
   pressDuration: 0.1
   readyColor: {r: 1, g: 1, b: 1, a: 1}
   cooldownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  demoGoal: {fileID: 0}
+  goalBackDistance: 6
+  demoParent: {fileID: 0}
 --- !u!114 &1952556421
 MonoBehaviour:
   m_ObjectHideFlags: 0

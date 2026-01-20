@@ -19,6 +19,9 @@ TagManager:
   - oniDemo
   - DemoGoal
   - DemoJump
+  - FireDemo
+  - WaterDemo
+  - HitodamaDemo
   layers:
   - Default
   - TransparentFX
