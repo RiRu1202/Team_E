@@ -8,7 +8,7 @@ public class DashEnemyDeath : MonoBehaviour
     { // Rigidbody2D を取得
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
-        { // 重力を無効化して空中に浮かせる（落ちないように）
+        { // 重力をもたせる
             rb.gravityScale = 1;
         }
     }

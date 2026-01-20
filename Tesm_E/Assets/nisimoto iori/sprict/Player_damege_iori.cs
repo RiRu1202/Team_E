@@ -26,14 +26,12 @@ public class Player_damege_s:MonoBehaviour
     {
         if (collision.gameObject.tag == "trap")//�^�O�̐ݒ�
         {
-            Debug.Log("�����������[�I");
             float dirx = transform.position.x - collision.transform.position.x;
             Vector2 knockbackDir = new Vector2(Mathf.Sign(dirx), 0);
             StartCoroutine(ApplyKnockback(knockbackDir));
         }
         else if (collision.gameObject.tag == "wall")//�^�O�̐ݒ�
         {
-            Debug.Log("�����������[�I");
             float dirx = transform.position.x - collision.transform.position.x;
             Vector2 knockbackDir = new Vector2(Mathf.Sign(dirx), 0);
             StartCoroutine(ApplyKnockback(knockbackDir));
