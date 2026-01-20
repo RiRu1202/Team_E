@@ -44,7 +44,7 @@ public class CameraController : MonoBehaviour
     }
 
     // =============================
-    // š ƒS[ƒ‹ÚG”»’è š
+    // ƒS[ƒ‹ÚG”»’è
     // =============================
     private void OnTriggerEnter2D(Collider2D collision)
     {
