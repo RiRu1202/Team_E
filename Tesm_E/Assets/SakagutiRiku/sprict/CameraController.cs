@@ -1,12 +1,25 @@
 using UnityEngine;
 
+/// <summary>
+/// オートスクロール型2Dゲーム用のカメラ制御スクリプト
+/// ・右方向へ自動スクロール
+/// ・Goalタグに触れたらスクロール停止
+/// ・一時停止対応
+/// </summary>
 public class CameraController : MonoBehaviour
 {
-    public float scrollSpeed = 3.0f;  // カメラのスクロール速度
-    public Transform player;          // プレイヤー
-    public Transform goal;            // ゴール
-    public static string gameState = "playing";  // "playing" / "clear" / "gameover"
-    public bool isPaused = false;     // ← カメラ一時停止用
+    // =============================
+    // カメラ設定
+    // =============================
+    public float scrollSpeed = 3.0f;  // カメラが右へ移動する速度
+
+    // =============================
+    // ゲーム状態管理
+    // =============================
+    public static string gameState = "playing";
+
+    // カメラの一時停止フラグ
+    public bool isPaused = false;
 
     void Start()
     {
@@ -16,27 +29,33 @@ public class CameraController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // ゲーム中でなければ何もしない
+        // プレイ中でなければ動かさない
         if (gameState != "playing") return;
 
-        // 一時停止中はスクロールしない
+        // 停止中ならスクロールしない
         if (isPaused) return;
 
-        // プレイヤーが消えたらゲームオーバー
-        if (player == null)
-        {
-            gameState = "gameover";
-            return;
-        }
+        // カメラを右へオートスクロール
+        transform.position += new Vector3(
+            scrollSpeed * Time.fixedDeltaTime,
+            0,
+            0
+        );
+    }
 
-        // プレイヤーがゴールに到達したらクリア
-        if (player.position.x >= goal.position.x)
+    // =============================
+    // ★ ゴール接触判定 ★
+    // =============================
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // 触れた相手が Goal タグなら
+        if (collision.CompareTag("Goal"))
         {
+            // カメラを停止
+            isPaused = true;
+
+            // 必要なら状態変更（任意）
             gameState = "clear";
-            return;
         }
-
-        // カメラを右にスクロール
-        transform.position += new Vector3(scrollSpeed * Time.fixedDeltaTime, 0, 0);
     }
 }

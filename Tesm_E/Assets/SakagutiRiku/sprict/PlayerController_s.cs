@@ -1,74 +1,63 @@
 using UnityEngine;
+using UnityEngine.SceneManagement; // ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆã«å¿…è¦
 
-/// <summary>
-/// 2D ƒvƒŒƒCƒ„[‚ÌˆÚ“®‚ÆƒWƒƒƒ“ƒv‚ğ§Œä‚·‚éƒXƒNƒŠƒvƒg
-/// </summary>
 public class PlayerController_s : MonoBehaviour
 {
-    [Header("ƒvƒŒƒCƒ„[‚ÌˆÚ“®İ’è")]
-    public float moveSpeed = 5f;   // ƒI[ƒgƒXƒNƒ[ƒ‹‘¬“x
-    public float jumpForce = 5f;   // ƒWƒƒƒ“ƒv—Í
+    Rigidbody2D rbody;               // Rigidbody2Då‹ã®å¤‰æ•°
+    public float speed = 3.0f;
 
-    private Rigidbody2D rb;
-
-    private bool isGrounded = false;  // ’n–Ê‚ÉÚ‚µ‚Ä‚¢‚é‚©
-    private bool isJumping = false;   // ƒWƒƒƒ“ƒv’†‚©‚Ç‚¤‚©
+    public static string gameState = "playing";  // ã‚²ãƒ¼ãƒ ã®çŠ¶æ…‹
 
     void Start()
     {
         Application.targetFrameRate = 60;
-        rb = GetComponent<Rigidbody2D>();
+
+        // Rigidbody2Dã‚’å–å¾—
+        rbody = GetComponent<Rigidbody2D>();
+        gameState = "playing";  // ã‚²ãƒ¼ãƒ ä¸­ã«è¨­å®š
     }
 
     void Update()
     {
-        // -----------------------------
-        // š ƒI[ƒgƒXƒNƒ[ƒ‹ˆÚ“® š
-        // -----------------------------
-        float xSpeed = isJumping ? moveSpeed * 0.6f : moveSpeed;
-        rb.linearVelocity = new Vector2(xSpeed, rb.linearVelocity.y);
-
-        // -----------------------------
-        // š ƒWƒƒƒ“ƒvˆ—iAddForce‹Ö~ ¨ velocity§Œäjš
-        // -----------------------------
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            isJumping = true;           // ‹ó’†ó‘Ô‚É‚·‚éiŒë”»’è–h~j
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);  // —‰º’†‚Ì¨‚¢ƒŠƒZƒbƒg
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); // ˆÀ’è‚µ‚½ƒWƒƒƒ“ƒv
-        }
-
-        // ’…’n‚µ‚½‚çƒWƒƒƒ“ƒvó‘Ô‰ğœ
-        if (isGrounded)
-        {
-            isJumping = false;
-        }
+        if (gameState != "playing") return;
     }
 
-    // -----------------------------
-    // š ’n–Ê”»’èi•Ç‚Ì‰¡‚ğŒë”»’è‚µ‚È‚¢jš
-    // -----------------------------
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        // è¡çªã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒã€ŒDeadã€ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¾ãŸã¯ã€ŒEnemyã€ãƒ¬ã‚¤ãƒ¤ãƒ¼ã ã£ãŸå ´åˆã€GameOverã«ã™ã‚‹åˆ¤å®š
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Dead"))
         {
-            foreach (ContactPoint2D contact in collision.contacts)
-            {
-                // normal.y > 0.5  ã‚©‚çæ‚Á‚½‚¾‚¯Ú’n‚Æ”»’è
-                if (contact.normal.y > 0.1f)
-                {
-                    isGrounded = true;
-                    return;
-                }
-            }
+            Debug.Log("ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ç”»é¢ç§»å‹•");
+            GameOver();
         }
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    void FixedUpdate()
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            isGrounded = false;
-        }
+        if (gameState != "playing") return;
+
+        // Rigidbody2Dã®é€Ÿåº¦ã‚’æ›´æ–°
+        rbody.linearVelocity = new Vector2(speed, rbody.linearVelocity.y);
     }
+
+    // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼å‡¦ç†
+    void GameOver()
+    {
+        Debug.Log("ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ï¼");
+        SceneManager.LoadScene("GameOva"); // ã‚·ãƒ¼ãƒ³åã‚’æ­£ã—ãä¿®æ­£
+    }
+
+    // ã‚´ãƒ¼ãƒ«åˆ¤å®š
+    /*void OnTriggerEnter2D(Collider2D other)
+    {
+        // è§¦ã‚ŒãŸç›¸æ‰‹ãŒ "Goal" ã‚¿ã‚°ã®å ´åˆã®ã¿åå¿œ
+        if (other.CompareTag("Goal"))
+        {
+            // ã‚«ãƒ¡ãƒ©åœæ­¢ãªã©ã«ä½¿ã†ã‚²ãƒ¼ãƒ çŠ¶æ…‹ã‚’å¤‰æ›´
+            CameraController.gameState = "clear";
+
+            // "Clear" ã‚·ãƒ¼ãƒ³ã«åˆ‡ã‚Šæ›¿ãˆ
+            SceneManager.LoadScene("Clear");
+        }
+    }*/
 }
