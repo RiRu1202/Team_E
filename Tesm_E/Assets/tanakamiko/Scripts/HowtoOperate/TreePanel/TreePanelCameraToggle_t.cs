@@ -4,6 +4,7 @@ public class TreePanelCameraToggle_t : MonoBehaviour
 {
     public CameraController_t cameraCtrl;
 
+
     void OnEnable()
     {
         if (cameraCtrl != null)

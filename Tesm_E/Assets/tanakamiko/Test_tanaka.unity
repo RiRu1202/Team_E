@@ -24316,7 +24316,7 @@ MonoBehaviour:
     m_Bits: 0
   shiftDistance: 5
   playerGateName: playergate
-  spawnOffset: 7
+  spawnOffset: 9
   cooldownTime: 5
   cardTransform: {fileID: 280800756}
   cardRenderer: {fileID: 280800755}
