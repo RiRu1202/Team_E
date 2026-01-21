@@ -1,0 +1,49 @@
+using UnityEngine;
+using UnityEngine.SceneManagement; // シーン切り替えに必要
+
+public class PlayerController1_t : MonoBehaviour
+{
+    Rigidbody2D rbody;               // Rigidbody2D型の変数
+    public float speed = 3.0f;
+
+    public static string gameState = "playing";  // ゲームの状態
+
+    void Start()
+    {
+        Application.targetFrameRate = 60;
+
+        // Rigidbody2Dを取得
+        rbody = GetComponent<Rigidbody2D>();
+        gameState = "playing";  // ゲーム中に設定
+    }
+
+    void Update()
+    {
+        if (gameState != "playing") return;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // 衝突したオブジェクトが「Dead」レイヤーまたは「Enemy」レイヤーだった場合、GameOverにする判定
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Dead")|| collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            Debug.Log("ゲームオーバー画面移動");
+            GameOver();
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (gameState != "playing") return;
+
+        // Rigidbody2Dの速度を更新
+        rbody.linearVelocity = new Vector2(speed, rbody.linearVelocity.y);
+    }
+
+    // ゲームオーバー処理
+    void GameOver()
+    {
+        Debug.Log("ゲームオーバー！");
+        SceneManager.LoadScene("GameOva"); // シーン名を正しく修正
+    }
+}
