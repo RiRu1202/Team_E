@@ -320,7 +320,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 89.72}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -962.15, y: -537.28}
+  m_AnchoredPosition: {x: -963.18, y: -537.28}
   m_SizeDelta: {x: 7.71, y: 4.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &69080910
@@ -1906,7 +1906,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 362288603}
   m_LocalRotation: {x: 0.02523476, y: 0.21800846, z: -0.011364118, w: 0.9755544}
-  m_LocalPosition: {x: 0, y: 0, z: 306.04}
+  m_LocalPosition: {x: 0, y: 0, z: 306.46}
   m_LocalScale: {x: 0.9, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1914,7 +1914,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 3.106, y: 25.177, z: -0.641}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -961.05, y: -539.16}
+  m_AnchoredPosition: {x: -961.95, y: -539.15}
   m_SizeDelta: {x: 7.18, y: 6.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &362288606
@@ -3739,6 +3739,7 @@ GameObject:
   - component: {fileID: 645652808}
   - component: {fileID: 645652810}
   - component: {fileID: 645652809}
+  - component: {fileID: 645652811}
   m_Layer: 5
   m_Name: WaterPanel
   m_TagString: Untagged
@@ -3870,6 +3871,19 @@ MonoBehaviour:
   enemyRoot: {fileID: 3184378419006071066}
   enemyRenderer: {fileID: 6240708774390325025}
   enemyCollider: {fileID: 6771661839923305612}
+--- !u!114 &645652811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645652802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330fe4fa2e72f8040becbebd969eae32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitodama: {fileID: 6771661839923305613}
 --- !u!1 &682073321
 GameObject:
   m_ObjectHideFlags: 0
@@ -4960,10 +4974,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 758658901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcc23d7c31d5f994cad18e4189721f66, type: 3}
+  m_Script: {fileID: 11500000, guid: 90adc50fe59a2ea468508fde922bd031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oniRespawn: {fileID: 0}
+  oni: {fileID: 1122286219}
 --- !u!1 &784886334
 GameObject:
   m_ObjectHideFlags: 0
