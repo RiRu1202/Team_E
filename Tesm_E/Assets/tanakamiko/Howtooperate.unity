@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 69080911}
   - component: {fileID: 69080910}
   m_Layer: 0
-  m_Name: "\u77E2\u5370_0 (1)"
+  m_Name: arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -320,7 +320,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 89.72}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -962.15, y: -537.28}
+  m_AnchoredPosition: {x: -963.18, y: -537.28}
   m_SizeDelta: {x: 7.71, y: 4.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &69080910
@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 130134124}
   - component: {fileID: 130134125}
   m_Layer: 0
-  m_Name: Square
+  m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -643,7 +643,7 @@ GameObject:
   - component: {fileID: 134686012}
   - component: {fileID: 134686011}
   m_Layer: 0
-  m_Name: "\u77E2\u5370_0 (2)"
+  m_Name: arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1748,7 +1748,7 @@ GameObject:
   - component: {fileID: 278324289}
   - component: {fileID: 278324290}
   m_Layer: 0
-  m_Name: Square
+  m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1837,7 +1837,7 @@ GameObject:
   - component: {fileID: 362288607}
   - component: {fileID: 362288606}
   m_Layer: 0
-  m_Name: "\u30DE\u30A6\u30B9_0"
+  m_Name: mouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1906,7 +1906,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 362288603}
   m_LocalRotation: {x: 0.02523476, y: 0.21800846, z: -0.011364118, w: 0.9755544}
-  m_LocalPosition: {x: 0, y: 0, z: 306.04}
+  m_LocalPosition: {x: 0, y: 0, z: 306.46}
   m_LocalScale: {x: 0.9, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1914,7 +1914,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 3.106, y: 25.177, z: -0.641}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -961.05, y: -539.16}
+  m_AnchoredPosition: {x: -961.95, y: -539.15}
   m_SizeDelta: {x: 7.18, y: 6.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &362288606
@@ -2535,7 +2535,7 @@ GameObject:
   - component: {fileID: 500346902}
   - component: {fileID: 500346901}
   m_Layer: 5
-  m_Name: "\u6570\u5B57"
+  m_Name: page text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3508,7 +3508,7 @@ GameObject:
   - component: {fileID: 624381372}
   - component: {fileID: 624381373}
   m_Layer: 3
-  m_Name: suta-to
+  m_Name: start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3739,6 +3739,7 @@ GameObject:
   - component: {fileID: 645652808}
   - component: {fileID: 645652810}
   - component: {fileID: 645652809}
+  - component: {fileID: 645652811}
   m_Layer: 5
   m_Name: WaterPanel
   m_TagString: Untagged
@@ -3870,6 +3871,19 @@ MonoBehaviour:
   enemyRoot: {fileID: 3184378419006071066}
   enemyRenderer: {fileID: 6240708774390325025}
   enemyCollider: {fileID: 6771661839923305612}
+--- !u!114 &645652811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645652802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330fe4fa2e72f8040becbebd969eae32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitodama: {fileID: 6771661839923305613}
 --- !u!1 &682073321
 GameObject:
   m_ObjectHideFlags: 0
@@ -4877,7 +4891,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -23.448853, y: -13.594971}
+  m_AnchoredPosition: {x: -23.448975, y: -13.594971}
   m_SizeDelta: {x: 46.897, y: 27.191}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &758658905
@@ -4960,10 +4974,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 758658901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcc23d7c31d5f994cad18e4189721f66, type: 3}
+  m_Script: {fileID: 11500000, guid: 90adc50fe59a2ea468508fde922bd031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oniRespawn: {fileID: 0}
+  oni: {fileID: 1122286219}
 --- !u!1 &784886334
 GameObject:
   m_ObjectHideFlags: 0
@@ -5896,7 +5910,7 @@ GameObject:
   - component: {fileID: 1054858229}
   - component: {fileID: 1054858228}
   m_Layer: 5
-  m_Name: "\u64CD\u4F5C\u65B9\u6CD5"
+  m_Name: 'Operation method text '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8551,7 +8565,7 @@ GameObject:
   - component: {fileID: 1398147902}
   - component: {fileID: 1398147903}
   m_Layer: 3
-  m_Name: suta-to
+  m_Name: start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9300,7 +9314,7 @@ GameObject:
   - component: {fileID: 1521433392}
   - component: {fileID: 1521433391}
   m_Layer: 5
-  m_Name: "\u30DE\u30A6\u30B9"
+  m_Name: mouse text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9541,7 +9555,7 @@ GameObject:
   - component: {fileID: 1542446915}
   - component: {fileID: 1542446916}
   m_Layer: 0
-  m_Name: Square
+  m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9675,7 +9689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4115405797882249836, guid: a0027dbf504b32440bf23562b429d0ea, type: 3}
       propertyPath: m_Name
-      value: "\u571F_0"
+      value: soil
       objectReference: {fileID: 0}
     - target: {fileID: 4115405797882249836, guid: a0027dbf504b32440bf23562b429d0ea, type: 3}
       propertyPath: m_Layer
@@ -9819,7 +9833,7 @@ GameObject:
   - component: {fileID: 1627245828}
   - component: {fileID: 1627245827}
   m_Layer: 0
-  m_Name: "\u30B9\u30DA\u30FC\u30B9\u30AD\u30FC_0"
+  m_Name: space key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10090,7 +10104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6323751699681773421, guid: c2060e23e4f45bf4abcb03eb3e72848b, type: 3}
       propertyPath: m_Name
-      value: "\u6728_0_t"
+      value: tree
       objectReference: {fileID: 0}
     - target: {fileID: 6323751699681773421, guid: c2060e23e4f45bf4abcb03eb3e72848b, type: 3}
       propertyPath: m_Layer
@@ -10113,7 +10127,7 @@ GameObject:
   - component: {fileID: 1653740475}
   - component: {fileID: 1653740474}
   m_Layer: 5
-  m_Name: "\u6570\u5B57"
+  m_Name: page text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10318,7 +10332,7 @@ GameObject:
   - component: {fileID: 1701783056}
   - component: {fileID: 1701783055}
   m_Layer: 5
-  m_Name: "\u6570\u5B57"
+  m_Name: page text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10725,7 +10739,7 @@ GameObject:
   - component: {fileID: 1726805091}
   - component: {fileID: 1726805090}
   m_Layer: 5
-  m_Name: "\u6570\u5B57"
+  m_Name: page text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11172,7 +11186,7 @@ GameObject:
   - component: {fileID: 1835802126}
   - component: {fileID: 1835802125}
   m_Layer: 5
-  m_Name: "\u6570\u5B57"
+  m_Name: page text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11660,7 +11674,7 @@ GameObject:
   - component: {fileID: 1872662775}
   - component: {fileID: 1872662776}
   m_Layer: 0
-  m_Name: Square
+  m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11990,7 +12004,7 @@ GameObject:
   - component: {fileID: 1941962172}
   - component: {fileID: 1941962171}
   m_Layer: 5
-  m_Name: "\u30B8\u30E3\u30F3\u30D7"
+  m_Name: jumping text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13451,7 +13465,7 @@ GameObject:
   - component: {fileID: 2122116750}
   - component: {fileID: 2122116751}
   m_Layer: 0
-  m_Name: Square
+  m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13649,7 +13663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2577822284495780056, guid: 9f61762959db7e74891b75cb475d2ade, type: 3}
       propertyPath: m_Name
-      value: "\u706B\u7389__t_T"
+      value: fireball
       objectReference: {fileID: 0}
     - target: {fileID: 2577822284495780056, guid: 9f61762959db7e74891b75cb475d2ade, type: 3}
       propertyPath: m_TagString

@@ -50,10 +50,6 @@ public class DemoPanelReset_t : MonoBehaviour
             for (int i = spawnedRoot.childCount - 1; i >= 0; i--)
                 Destroy(spawnedRoot.GetChild(i).gameObject);
         }
-
-        // ④ 自動札を止める（パネルOFFでCoroutineが止まるが念のため）
-        // ※ AutoClick側がOnDisableで止めるなら不要。入れても害なし。
-        // treeAuto / soilAuto は特に呼ばなくてOK
     }
 
     void OnEnable()

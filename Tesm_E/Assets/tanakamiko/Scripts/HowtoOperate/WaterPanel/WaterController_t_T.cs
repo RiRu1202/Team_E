@@ -8,7 +8,7 @@ public class WaterController_t_T : MonoBehaviour
 
     private float lastTime = -999f;
 
-    public void Fire()
+    public void Water()
     {
         if (Time.time < lastTime + cooldown) return;
 

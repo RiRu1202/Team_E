@@ -49,7 +49,7 @@ public class AutoClickWater_t_T : MonoBehaviour
             transform.localScale = normalScale;
 
             // ”­ŽË
-            if (waterController != null) waterController.Fire();
+            if (waterController != null) waterController.Water();
 
             yield return new WaitForSeconds(interval);
         }
