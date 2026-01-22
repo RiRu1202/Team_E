@@ -12,12 +12,4 @@ public class DestroyWhenInvisible_t : MonoBehaviour
         // ‰½‚©‚ÉÕ“Ë‚µ‚½‚çÁ‚·
         Destroy(gameObject);
     }
-
-    // ‚à‚µTrigger‚Ìê‡‚Í‰º‚ğg‚¤
-    /*
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Destroy(gameObject);
-    }
-    */
 }

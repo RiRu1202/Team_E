@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 69080911}
   - component: {fileID: 69080910}
   m_Layer: 0
-  m_Name: "\u77E2\u5370_0 (1)"
+  m_Name: arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 130134124}
   - component: {fileID: 130134125}
   m_Layer: 0
-  m_Name: Square
+  m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -643,7 +643,7 @@ GameObject:
   - component: {fileID: 134686012}
   - component: {fileID: 134686011}
   m_Layer: 0
-  m_Name: "\u77E2\u5370_0 (2)"
+  m_Name: arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1748,7 +1748,7 @@ GameObject:
   - component: {fileID: 278324289}
   - component: {fileID: 278324290}
   m_Layer: 0
-  m_Name: Square
+  m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1837,7 +1837,7 @@ GameObject:
   - component: {fileID: 362288607}
   - component: {fileID: 362288606}
   m_Layer: 0
-  m_Name: "\u30DE\u30A6\u30B9_0"
+  m_Name: mouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2535,7 +2535,7 @@ GameObject:
   - component: {fileID: 500346902}
   - component: {fileID: 500346901}
   m_Layer: 5
-  m_Name: "\u6570\u5B57"
+  m_Name: page text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3508,7 +3508,7 @@ GameObject:
   - component: {fileID: 624381372}
   - component: {fileID: 624381373}
   m_Layer: 3
-  m_Name: suta-to
+  m_Name: start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4891,7 +4891,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -23.448853, y: -13.594971}
+  m_AnchoredPosition: {x: -23.448975, y: -13.594971}
   m_SizeDelta: {x: 46.897, y: 27.191}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &758658905
@@ -5910,7 +5910,7 @@ GameObject:
   - component: {fileID: 1054858229}
   - component: {fileID: 1054858228}
   m_Layer: 5
-  m_Name: "\u64CD\u4F5C\u65B9\u6CD5"
+  m_Name: 'Operation method text '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8565,7 +8565,7 @@ GameObject:
   - component: {fileID: 1398147902}
   - component: {fileID: 1398147903}
   m_Layer: 3
-  m_Name: suta-to
+  m_Name: start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9314,7 +9314,7 @@ GameObject:
   - component: {fileID: 1521433392}
   - component: {fileID: 1521433391}
   m_Layer: 5
-  m_Name: "\u30DE\u30A6\u30B9"
+  m_Name: mouse text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9555,7 +9555,7 @@ GameObject:
   - component: {fileID: 1542446915}
   - component: {fileID: 1542446916}
   m_Layer: 0
-  m_Name: Square
+  m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9689,7 +9689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4115405797882249836, guid: a0027dbf504b32440bf23562b429d0ea, type: 3}
       propertyPath: m_Name
-      value: "\u571F_0"
+      value: soil
       objectReference: {fileID: 0}
     - target: {fileID: 4115405797882249836, guid: a0027dbf504b32440bf23562b429d0ea, type: 3}
       propertyPath: m_Layer
@@ -9833,7 +9833,7 @@ GameObject:
   - component: {fileID: 1627245828}
   - component: {fileID: 1627245827}
   m_Layer: 0
-  m_Name: "\u30B9\u30DA\u30FC\u30B9\u30AD\u30FC_0"
+  m_Name: space key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10104,7 +10104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6323751699681773421, guid: c2060e23e4f45bf4abcb03eb3e72848b, type: 3}
       propertyPath: m_Name
-      value: "\u6728_0_t"
+      value: tree
       objectReference: {fileID: 0}
     - target: {fileID: 6323751699681773421, guid: c2060e23e4f45bf4abcb03eb3e72848b, type: 3}
       propertyPath: m_Layer
@@ -10127,7 +10127,7 @@ GameObject:
   - component: {fileID: 1653740475}
   - component: {fileID: 1653740474}
   m_Layer: 5
-  m_Name: "\u6570\u5B57"
+  m_Name: page text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10332,7 +10332,7 @@ GameObject:
   - component: {fileID: 1701783056}
   - component: {fileID: 1701783055}
   m_Layer: 5
-  m_Name: "\u6570\u5B57"
+  m_Name: page text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10739,7 +10739,7 @@ GameObject:
   - component: {fileID: 1726805091}
   - component: {fileID: 1726805090}
   m_Layer: 5
-  m_Name: "\u6570\u5B57"
+  m_Name: page text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11186,7 +11186,7 @@ GameObject:
   - component: {fileID: 1835802126}
   - component: {fileID: 1835802125}
   m_Layer: 5
-  m_Name: "\u6570\u5B57"
+  m_Name: page text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11674,7 +11674,7 @@ GameObject:
   - component: {fileID: 1872662775}
   - component: {fileID: 1872662776}
   m_Layer: 0
-  m_Name: Square
+  m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12004,7 +12004,7 @@ GameObject:
   - component: {fileID: 1941962172}
   - component: {fileID: 1941962171}
   m_Layer: 5
-  m_Name: "\u30B8\u30E3\u30F3\u30D7"
+  m_Name: jumping text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13465,7 +13465,7 @@ GameObject:
   - component: {fileID: 2122116750}
   - component: {fileID: 2122116751}
   m_Layer: 0
-  m_Name: Square
+  m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13663,7 +13663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2577822284495780056, guid: 9f61762959db7e74891b75cb475d2ade, type: 3}
       propertyPath: m_Name
-      value: "\u706B\u7389__t_T"
+      value: fireball
       objectReference: {fileID: 0}
     - target: {fileID: 2577822284495780056, guid: 9f61762959db7e74891b75cb475d2ade, type: 3}
       propertyPath: m_TagString

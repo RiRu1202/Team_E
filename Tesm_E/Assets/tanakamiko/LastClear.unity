@@ -873,7 +873,7 @@ GameObject:
   - component: {fileID: 1241162569}
   - component: {fileID: 1241162568}
   m_Layer: 5
-  m_Name: 'kuriatekisuto '
+  m_Name: cleartext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -951,7 +951,7 @@ GameObject:
   - component: {fileID: 1241182543}
   - component: {fileID: 1241182542}
   m_Layer: 0
-  m_Name: "\u5BFA\u9662_0"
+  m_Name: temple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1405,7 +1405,7 @@ GameObject:
   - component: {fileID: 1772088890}
   - component: {fileID: 1772088889}
   m_Layer: 0
-  m_Name: "\u30AF\u30EA\u30A2\u80CC\u666F\u4FEE\u6B63_0"
+  m_Name: clear background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
