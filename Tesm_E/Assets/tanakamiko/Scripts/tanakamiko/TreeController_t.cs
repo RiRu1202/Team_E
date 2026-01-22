@@ -141,7 +141,7 @@ public class TreeController_t : MonoBehaviour
 
         if (demoGoal != null)
         {
-            // ★DemoGoalの6マス前に固定
+            // DemoGoalの6マス前に固定
             spawnX = demoGoal.position.x - goalBackDistance;
         }
         else
@@ -197,7 +197,7 @@ public class TreeController_t : MonoBehaviour
     }
 
     //==============================
-    // ★ デモ用：外部から木生成を呼ぶ
+    // 外部から木生成を呼ぶ
     //==============================
     public void DemoSpawnTree()
     {
