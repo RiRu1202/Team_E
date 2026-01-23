@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 211561863}
   - component: {fileID: 211561862}
   - component: {fileID: 211561861}
+  - component: {fileID: 211561864}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -281,8 +282,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1407874648}
-        m_TargetAssemblyTypeName: StrtButton_t, Assembly-CSharp
+      - m_Target: {fileID: 211561864}
+        m_TargetAssemblyTypeName: TitleButton_t, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 1
         m_Arguments:
@@ -331,6 +332,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211561859}
   m_CullTransparentMesh: 1
+--- !u!114 &211561864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211561859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83c984bebf7f4a846a48fc8a4ba627eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 1407874646}
+  clickSE: {fileID: 8300000, guid: 8f7cb73d4f4be474a96c81b13a23e7f3, type: 3}
+  nextSceneName: Test_sakagiti
 --- !u!1 &315440414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,8 +1055,6 @@ GameObject:
   - component: {fileID: 1407874651}
   - component: {fileID: 1407874650}
   - component: {fileID: 1407874649}
-  - component: {fileID: 1407874648}
-  - component: {fileID: 1407874647}
   - component: {fileID: 1407874646}
   m_Layer: 5
   m_Name: Canvas
@@ -1146,36 +1160,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1407874647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1407874644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83c984bebf7f4a846a48fc8a4ba627eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 1407874646}
-  clickSE: {fileID: 8300000, guid: 8f7cb73d4f4be474a96c81b13a23e7f3, type: 3}
-  nextSceneName: Title
---- !u!114 &1407874648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1407874644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79e7e8968bdb68f44a21e4fc22d9f38a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 1407874646}
-  clickSE: {fileID: 8300000, guid: 8f7cb73d4f4be474a96c81b13a23e7f3, type: 3}
-  nextSceneName: Test_sakagiti
 --- !u!114 &1407874649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1273,6 +1257,7 @@ GameObject:
   - component: {fileID: 1619199289}
   - component: {fileID: 1619199288}
   - component: {fileID: 1619199287}
+  - component: {fileID: 1619199290}
   m_Layer: 5
   m_Name: TitleButton
   m_TagString: Untagged
@@ -1344,7 +1329,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1407874647}
+      - m_Target: {fileID: 1619199290}
         m_TargetAssemblyTypeName: TitleButton_t, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 1
@@ -1394,6 +1379,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619199285}
   m_CullTransparentMesh: 1
+--- !u!114 &1619199290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619199285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83c984bebf7f4a846a48fc8a4ba627eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 1407874646}
+  clickSE: {fileID: 8300000, guid: 8f7cb73d4f4be474a96c81b13a23e7f3, type: 3}
+  nextSceneName: Title
 --- !u!1 &1772088888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,6 +1493,7 @@ GameObject:
   - component: {fileID: 1987292915}
   - component: {fileID: 1987292914}
   - component: {fileID: 1987292917}
+  - component: {fileID: 1987292918}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1618,6 +1619,103 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!82 &1987292918
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987292913}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 2ccbdac682b1e9949870bf663ae3382a, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

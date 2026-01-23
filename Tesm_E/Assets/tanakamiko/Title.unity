@@ -297,6 +297,7 @@ GameObject:
   - component: {fileID: 390759944}
   - component: {fileID: 390759943}
   - component: {fileID: 390759942}
+  - component: {fileID: 390759945}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -368,8 +369,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 996225681}
-        m_TargetAssemblyTypeName: StrtButton_t, Assembly-CSharp
+      - m_Target: {fileID: 390759945}
+        m_TargetAssemblyTypeName: TitleButton_t, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 1
         m_Arguments:
@@ -418,6 +419,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390759940}
   m_CullTransparentMesh: 1
+--- !u!114 &390759945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390759940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83c984bebf7f4a846a48fc8a4ba627eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 996225686}
+  clickSE: {fileID: 8300000, guid: 8f7cb73d4f4be474a96c81b13a23e7f3, type: 3}
+  nextSceneName: Test_sakagiti
 --- !u!1 &404915604
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,9 +762,7 @@ GameObject:
   - component: {fileID: 996225679}
   - component: {fileID: 996225678}
   - component: {fileID: 996225677}
-  - component: {fileID: 996225681}
   - component: {fileID: 996225683}
-  - component: {fileID: 996225684}
   - component: {fileID: 996225686}
   - component: {fileID: 996225687}
   m_Layer: 5
@@ -845,21 +859,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &996225681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 996225676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79e7e8968bdb68f44a21e4fc22d9f38a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 996225686}
-  clickSE: {fileID: 8300000, guid: 8f7cb73d4f4be474a96c81b13a23e7f3, type: 3}
-  nextSceneName: Test_sakagiti
 --- !u!114 &996225683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -874,21 +873,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonSound: {fileID: 8300000, guid: 8f7cb73d4f4be474a96c81b13a23e7f3, type: 3}
   errorSound: {fileID: 8300000, guid: 0bb629b4d2f5af94fb04031c8e1cb350, type: 3}
---- !u!114 &996225684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 996225676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f775a5a6e03adb1419c0e8b2c7238dd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 996225686}
-  clickSE: {fileID: 8300000, guid: 8f7cb73d4f4be474a96c81b13a23e7f3, type: 3}
-  nextSceneName: Howtooperate
 --- !u!82 &996225686
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1886,6 +1870,7 @@ GameObject:
   - component: {fileID: 1912957884}
   - component: {fileID: 1912957883}
   - component: {fileID: 1912957882}
+  - component: {fileID: 1912957885}
   m_Layer: 5
   m_Name: HowTooperate
   m_TagString: Untagged
@@ -1957,8 +1942,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 996225684}
-        m_TargetAssemblyTypeName: Howtooperate_t, Assembly-CSharp
+      - m_Target: {fileID: 1912957885}
+        m_TargetAssemblyTypeName: TitleButton_t, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 1
         m_Arguments:
@@ -2007,6 +1992,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912957880}
   m_CullTransparentMesh: 1
+--- !u!114 &1912957885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912957880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83c984bebf7f4a846a48fc8a4ba627eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 996225686}
+  clickSE: {fileID: 8300000, guid: 8f7cb73d4f4be474a96c81b13a23e7f3, type: 3}
+  nextSceneName: HowTooperate
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
