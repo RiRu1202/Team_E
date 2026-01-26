@@ -13,28 +13,40 @@ public class TitleQuitButton_t : MonoBehaviour
     // UI ButtonのOnClickに入れる
     public void QuitGame()
     {
+        // ★ セーブデータを破棄
+        ClearSaveData();
+
         StartCoroutine(QuitRoutine());
+    }
+
+    void ClearSaveData()
+    {
+        // 全セーブ削除（進行・SavedSceneなど全部）
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+
+        Debug.Log("セーブデータをすべて削除しました");
     }
 
     IEnumerator QuitRoutine()
     {
-        // SE再生
         float wait = 0f;
+
+        // SE再生
         if (seSource != null && clickSE != null)
         {
             seSource.PlayOneShot(clickSE);
-
             wait = (delay > 0f) ? delay : clickSE.length;
         }
         else
         {
-            // 設定漏れでも即終了はできるようにする
             wait = (delay > 0f) ? delay : 0f;
         }
 
-        if (wait > 0f) yield return new WaitForSeconds(wait);
+        if (wait > 0f)
+            yield return new WaitForSeconds(wait);
 
-        // 終了（Editorとビルドで処理を分ける）
+        // 終了（Editorとビルドで分岐）
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -42,4 +54,5 @@ public class TitleQuitButton_t : MonoBehaviour
 #endif
     }
 }
+
 
