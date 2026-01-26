@@ -25699,6 +25699,11 @@ MonoBehaviour:
   demoGoal: {fileID: 0}
   goalBackDistance: 6
   demoParent: {fileID: 0}
+  enablePreview: 1
+  previewAlpha: 0.35
+  previewReadyColor: {r: 1, g: 1, b: 1, a: 1}
+  previewCooldownColor: {r: 1, g: 0.4, b: 0.4, a: 1}
+  hidePreviewDuringCooldown: 0
 --- !u!114 &1952556421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25773,7 +25778,7 @@ MonoBehaviour:
   cooldownTime: 5
   cardTransform: {fileID: 280800756}
   cardRenderer: {fileID: 280800755}
-  normalScale: {x: 0.45, y: 0.45, z: 1}
+  normalScale: {x: 0.5, y: 0.5, z: 1}
   pressedScale: {x: 0.35, y: 0.35, z: 1}
   pressDuration: 0.1
   readyColor: {r: 1, g: 1, b: 1, a: 1}
