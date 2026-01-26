@@ -2748,8 +2748,8 @@ Tilemap:
   - first: {x: 51, y: -8, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 2
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -5468,8 +5468,8 @@ Tilemap:
   - first: {x: 51, y: -7, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 2
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -8188,8 +8188,8 @@ Tilemap:
   - first: {x: 51, y: -6, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 2
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -15717,16 +15717,16 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 1345
+  - m_RefCount: 1342
     m_Data: {fileID: 11400000, guid: ac42e36fb067a244d87bbbc19fefd18e, type: 2}
   - m_RefCount: 15
     m_Data: {fileID: 11400000, guid: 5c6e8a4ba0cfb524e93a4fe13b154236, type: 2}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 3
+    m_Data: {fileID: 11400000, guid: faf65edb14270c84fac7eee49533f29a, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 1345
+  - m_RefCount: 1342
     m_Data: {fileID: 8814752133525960799, guid: b2749ac0647b74945844313769c5dcd9, type: 3}
-  - m_RefCount: 15
+  - m_RefCount: 18
     m_Data: {fileID: 3074444902508496873, guid: 9704f01df0ccf9743831046465bfd283, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -25771,7 +25771,7 @@ MonoBehaviour:
   checkBoxSize: {x: 0.9, y: 0.9}
   blockLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   shiftDistance: 5
   playerGateName: playergate
   spawnOffset: 9
@@ -27040,6 +27040,14 @@ PrefabInstance:
     - target: {fileID: 5318910287311011759, guid: 7efd34bdca0d84046904e4c28c7d82db, type: 3}
       propertyPath: m_Name
       value: "\u571F_0 (1)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318910287311011759, guid: 7efd34bdca0d84046904e4c28c7d82db, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8566960399387051747, guid: 7efd34bdca0d84046904e4c28c7d82db, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
