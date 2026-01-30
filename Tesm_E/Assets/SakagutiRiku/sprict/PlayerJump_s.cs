@@ -1,103 +1,113 @@
 using UnityEngine;
 
-/// <summary>
-/// 2Dプレイヤーの自動移動・ジャンプを制御するスクリプト
-/// ・右方向へオートスクロール
-/// ・地面にいる時のみジャンプ可能
-/// ・壁の横を地面と誤判定しない
-/// </summary>
+// <summary>
+// 2D プレイヤーの移動とジャンプを制御するスクリプト（オートスクロール）
+// 壁に引っかかりにくいよう調整済み
+// </summary>
 public class PlayerJump_s : MonoBehaviour
 {
-    // =============================
-    // プレイヤーの移動設定
-    // =============================
     [Header("プレイヤーの移動設定")]
-    public float moveSpeed = 5f;   // 右方向への移動速度（オートスクロール）
-    public float jumpForce = 5f;   // ジャンプ時の上方向速度
+    public float moveSpeed = 5f;
+    public float jumpForce = 5f;
 
-    // Rigidbody2D 参照
     private Rigidbody2D rb;
 
-    // 状態管理用フラグ
-    private bool isGrounded = false;  // 地面に接しているかどうか
-    private bool isJumping = false;   // ジャンプ中かどうか
+    private bool isGrounded = false;
+    private bool isJumping = false;
+
+    // 接地が一瞬途切れてもジャンプできるようにするため
+    private float coyoteTime = 0.1f;      // 地面を離れてから許容する時間
+    private float coyoteTimer = 0f;
 
     void Start()
     {
-        // フレームレートを60fpsに固定（動作の安定化）
         Application.targetFrameRate = 60;
-
-        // Rigidbody2Dコンポーネントを取得
         rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        // =============================
-        // ★ オートスクロール移動処理 ★
-        // =============================
-
-        // ジャンプ中は少し移動速度を落とす
+        // -----------------------------
+        // ★ オートスクロール移動 ★
+        // -----------------------------
         float xSpeed = isJumping ? moveSpeed * 0.6f : moveSpeed;
-
-        // X方向の速度を常に一定に保つ
         rb.linearVelocity = new Vector2(xSpeed, rb.linearVelocity.y);
 
-        // =============================
-        // ★ ジャンプ処理 ★
-        // =============================
-        // ・スペースキーを押した
-        // ・地面に接している
-        // 上記2条件を満たしたときだけジャンプ
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        // -----------------------------
+        // ★ 接地（コヨーテタイム処理） ★
+        // -----------------------------
+        if (isGrounded)
         {
-            isJumping = true;  // ジャンプ状態にする（空中判定）
+            coyoteTimer = coyoteTime;  // 地面に触れている間リセット
+        }
+        else
+        {
+            coyoteTimer -= Time.deltaTime; // 時間経過で減少
+        }
 
-            // 落下中のY速度を一度リセット（ジャンプを安定させる）
+        // -----------------------------
+        // ★ ジャンプ処理 ★
+        // -----------------------------
+        if (Input.GetKeyDown(KeyCode.Space) && coyoteTimer > 0f)
+        {
+            isJumping = true;
+            isGrounded = false;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
-
-            // 上方向へ一定速度を与えてジャンプ
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
 
-        // =============================
-        // ★ 着地判定 ★
-        // =============================
-        // 地面に接していればジャンプ状態を解除
+        // 着地したら空中フラグ解除
         if (isGrounded)
         {
             isJumping = false;
         }
     }
 
-    // =============================
-    // ★ 地面判定処理 ★
-    // =============================
+    // -----------------------------
+    // ★ 地面判定（groundCheck なし版）★
+    // -----------------------------
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // 接触したオブジェクトが Ground レイヤーの場合のみ判定
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            // 接触点をすべてチェック
-            foreach (ContactPoint2D contact in collision.contacts)
-            {
-                // 接触面の法線が上向きなら「上から乗った」と判断
-                // normal.y > 0.1f にすることで壁の横を誤判定しない
-                if (contact.normal.y > 0.1f)
-                {
-                    isGrounded = true; // 地面に接地
-                    return;
-                }
-            }
+            JudgeGround(collision);
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            JudgeGround(collision);
         }
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        // Ground レイヤーから離れたら空中判定にする
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
+            // 完全に地面から離れた → isGrounded を false にするが
+            // すぐにはジャンプ不能にならない（coyoteTime のおかげ）
             isGrounded = false;
+        }
+    }
+
+    /// <summary>
+    /// 接触方向から地面かどうかを判定（壁の横判定を無視）
+    /// </summary>
+    void JudgeGround(Collision2D collision)
+    {
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            Vector2 normal = contact.normal;
+
+            // ● normal.y > 0.1 → 足元からの接触
+            // ● contact.point.y < プレイヤーの中心より下 → 正しく地面
+            if (normal.y > 0.1f && contact.point.y < transform.position.y - 0.05f)
+            {
+                isGrounded = true;
+                return;
+            }
         }
     }
 }
