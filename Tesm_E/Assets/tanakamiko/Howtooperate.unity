@@ -2236,7 +2236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -960.92676, y: -540.11206}
+  m_AnchoredPosition: {x: -960.92676, y: -540.21}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &480601683
@@ -2544,7 +2544,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -965.42, y: -539.86}
+  m_AnchoredPosition: {x: -965.42, y: -539.89}
   m_SizeDelta: {x: 2.91, y: 4.41}
   m_Pivot: {x: 0.51853454, y: 0.43884823}
 --- !u!212 &537980947
@@ -3301,7 +3301,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -965.47394, y: -541.7156}
+  m_AnchoredPosition: {x: -965.47394, y: -541.59576}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &624381373
@@ -3541,7 +3541,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -965.42, y: -539.86053}
+  m_AnchoredPosition: {x: -965.42, y: -539.89}
   m_SizeDelta: {x: 2.91, y: 4.41}
   m_Pivot: {x: 0.51853454, y: 0.43884823}
 --- !u!114 &697697831
@@ -7576,6 +7576,7 @@ GameObject:
   - component: {fileID: 1374661906}
   - component: {fileID: 1374661912}
   - component: {fileID: 1374661914}
+  - component: {fileID: 1374661915}
   m_Layer: 5
   m_Name: TreePanel
   m_TagString: Untagged
@@ -7690,6 +7691,23 @@ MonoBehaviour:
   cameraCtrl: {fileID: 1001707429}
   targetPlayer: {fileID: 537980946}
   enableFollowY: 1
+--- !u!114 &1374661915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374661905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc071c47fc5b2148a907f2e4c232ce7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraCtrl: {fileID: 1001707429}
+  cameraStartPos: {fileID: 624381372}
+  playCamera: 1
+  followY: 1
+  followYDelay: 0.2
 --- !u!1 &1398147901
 GameObject:
   m_ObjectHideFlags: 0
@@ -7723,7 +7741,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -965.4739, y: -541.71674}
+  m_AnchoredPosition: {x: -965.4739, y: -541.54144}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1398147903
@@ -9456,6 +9474,7 @@ GameObject:
   - component: {fileID: 1719284840}
   - component: {fileID: 1719284845}
   - component: {fileID: 1719284847}
+  - component: {fileID: 1719284848}
   m_Layer: 5
   m_Name: SoilPanel
   m_TagString: Untagged
@@ -9541,6 +9560,23 @@ MonoBehaviour:
   cameraCtrl: {fileID: 1001707429}
   targetPlayer: {fileID: 697697830}
   enableFollowY: 1
+--- !u!114 &1719284848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719284838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc071c47fc5b2148a907f2e4c232ce7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraCtrl: {fileID: 1001707429}
+  cameraStartPos: {fileID: 624381372}
+  playCamera: 1
+  followY: 1
+  followYDelay: 0.2
 --- !u!1 &1721834449
 GameObject:
   m_ObjectHideFlags: 0
