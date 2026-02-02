@@ -174,7 +174,7 @@ MonoBehaviour:
   - "\u706B\u306E\u6280\u306E\u8AAC\u660E\u3060\u3088\u3002\r\n\u706B\u306E\u672D\u3092\u30DE\u30A6\u30B9\u3067\u30AF\u30EA\u30C3\u30AF\u3059\u308B\u3068\u3001\u524D\u306B\u708E\u3092\u51FA\u305B\u308B\u3002\r\n\u708E\u304C\u5F53\u305F\u308B\u3068\u3001\u6575\u3092\u5012\u305B\u308B\u3088\u3002\r"
   - "\u305F\u3060\u3057\u300C\u706B\u306E\u7389\u300D\u306B\u306F\u52B9\u304B\u306A\u3044\u3002\r\n\u30AF\u30FC\u30EB\u30BF\u30A4\u30E0\u306F10\u79D2\u3002\r\n\u9023\u7D9A\u3067\u306F\u51FA\u305B\u306A\u3044\u304B\u3089\u3001\u30BF\u30A4\u30DF\u30F3\u30B0\u304C\u5927\u4E8B\uFF01\r"
   charInterval: 0.03
-  nextKey: 13
+  autoNextDelay: 4
 --- !u!212 &67852407
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2147,7 +2147,7 @@ MonoBehaviour:
   - "\u571F\u306E\u672D\u3092\u30DE\u30A6\u30B9\u3067\u30AF\u30EA\u30C3\u30AF\u3059\u308B\u3068\u3001\u571F\u3092\u51FA\u305B\u308B\u3002\r\n\u30AF\u30FC\u30EB\u30BF\u30A4\u30E0\u306F5\u79D2\u3002\r"
   - "\u571F\u306F\u8DB3\u5834\u306B\u306A\u3063\u3066\u3001\u5D16\u3092\u6E21\u308C\u308B\u3088\u3046\u306B\u306A\u308B\u3002\r\n\u30BF\u30A4\u30DF\u30F3\u30B0\u3088\u304F\u4F7F\u3063\u3066\u3001\u5148\u306B\u9032\u3082\u3046\uFF01\r"
   charInterval: 0.03
-  nextKey: 13
+  autoNextDelay: 4
 --- !u!212 &424318174
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3301,7 +3301,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -965.47394, y: -542.0168}
+  m_AnchoredPosition: {x: -965.47394, y: -541.7156}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &624381373
@@ -7723,7 +7723,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -965.4739, y: -542.0179}
+  m_AnchoredPosition: {x: -965.4739, y: -541.71674}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1398147903
@@ -8382,7 +8382,7 @@ MonoBehaviour:
   - "\u6728\u306E\u672D\u3092\u30DE\u30A6\u30B9\u3067\u30AF\u30EA\u30C3\u30AF\u3059\u308B\u3068\u3001\u6728\u3092\u51FA\u305B\u308B\u3002\r\n\u30AF\u30FC\u30EB\u30BF\u30A4\u30E0\u306F15\u79D2\u3002\r\n\u6728\u306F\u8DB3\u5834\u3068\u3057\u3066\u4F7F\u3048\u308B\u3002\r"
   - "\u3067\u3082\u3001\u51FA\u3059\u30BF\u30A4\u30DF\u30F3\u30B0\u304C\u3068\u3066\u3082\u5927\u4E8B\u3060\u3088\u3002\r\n\u4E88\u6E2C\u3092\u3088\u304F\u898B\u3066\u3001\u3061\u3087\u3046\u3069\u3044\u3044\u30BF\u30A4\u30DF\u30F3\u30B0\u3067\u4F7F\u304A\u3046\uFF01\r"
   charInterval: 0.03
-  nextKey: 13
+  autoNextDelay: 4
 --- !u!212 &1476989787
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8900,7 +8900,7 @@ MonoBehaviour:
   - "\u6700\u5F8C\u306F\u3001\u6C34\u306E\u6280\u306E\u8AAC\u660E\u3060\u3088\u3002\r\n\u30DE\u30A6\u30B9\u3092\u30AF\u30EA\u30C3\u30AF\u3059\u308B\u3068\u3001\u6C34\u3092\u524D\u306B\u51FA\u305B\u308B\u3002\r\n\u6C34\u304C\u5F53\u305F\u308B\u3068\u3001\u300C\u706B\u306E\u7389\u300D\u3092\u5012\u305B\u308B\u3002\r"
   - "\u706B\u3067\u306F\u5012\u305B\u306A\u3044\u6575\u306B\u6709\u52B9\u3060\u3088\u3002\r\n\u30AF\u30FC\u30EB\u30BF\u30A4\u30E0\u306F15\u79D2\u3002\r\n\u4F7F\u3046\u6575\u3092\u898B\u6975\u3081\u3066\u3001\u30BF\u30A4\u30DF\u30F3\u30B0\u3088\u304F\u4F7F\u304A\u3046\uFF01\r"
   charInterval: 0.03
-  nextKey: 13
+  autoNextDelay: 4
 --- !u!212 &1626388825
 SpriteRenderer:
   m_ObjectHideFlags: 0
