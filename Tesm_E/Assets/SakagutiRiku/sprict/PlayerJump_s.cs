@@ -1,9 +1,9 @@
 using UnityEngine;
 
-// <summary>
-// 2D プレイヤーの移動とジャンプを制御するスクリプト（オートスクロール）
-// 壁に引っかかりにくいよう調整済み
-// </summary>
+/// <summary>
+/// 2D プレイヤーの移動とジャンプを制御するスクリプト（オートスクロール）
+/// 壁に引っかかりにくく、空中で壁に当たっても着地しない完全版
+/// </summary>
 public class PlayerJump_s : MonoBehaviour
 {
     [Header("プレイヤーの移動設定")]
@@ -15,8 +15,8 @@ public class PlayerJump_s : MonoBehaviour
     private bool isGrounded = false;
     private bool isJumping = false;
 
-    // 接地が一瞬途切れてもジャンプできるようにするため
-    private float coyoteTime = 0.1f;      // 地面を離れてから許容する時間
+    // コヨーテタイム
+    private float coyoteTime = 0.1f;
     private float coyoteTimer = 0f;
 
     void Start()
@@ -34,15 +34,15 @@ public class PlayerJump_s : MonoBehaviour
         rb.linearVelocity = new Vector2(xSpeed, rb.linearVelocity.y);
 
         // -----------------------------
-        // ★ 接地（コヨーテタイム処理） ★
+        // ★ コヨーテタイム更新 ★
         // -----------------------------
         if (isGrounded)
         {
-            coyoteTimer = coyoteTime;  // 地面に触れている間リセット
+            coyoteTimer = coyoteTime;
         }
         else
         {
-            coyoteTimer -= Time.deltaTime; // 時間経過で減少
+            coyoteTimer -= Time.deltaTime;
         }
 
         // -----------------------------
@@ -52,11 +52,15 @@ public class PlayerJump_s : MonoBehaviour
         {
             isJumping = true;
             isGrounded = false;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
+
+            // Y速度を一度リセットして安定ジャンプ
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+
+            coyoteTimer = 0f;
         }
 
-        // 着地したら空中フラグ解除
+        // 着地したらジャンプ状態解除
         if (isGrounded)
         {
             isJumping = false;
@@ -64,7 +68,7 @@ public class PlayerJump_s : MonoBehaviour
     }
 
     // -----------------------------
-    // ★ 地面判定（groundCheck なし版）★
+    // ★ 地面判定 ★
     // -----------------------------
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -86,14 +90,13 @@ public class PlayerJump_s : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            // 完全に地面から離れた → isGrounded を false にするが
-            // すぐにはジャンプ不能にならない（coyoteTime のおかげ）
             isGrounded = false;
         }
     }
 
     /// <summary>
-    /// 接触方向から地面かどうかを判定（壁の横判定を無視）
+    /// 接触方向と位置から「地面のみ」を判定
+    /// 壁・段差・斜め接触を除外
     /// </summary>
     void JudgeGround(Collision2D collision)
     {
@@ -101,9 +104,13 @@ public class PlayerJump_s : MonoBehaviour
         {
             Vector2 normal = contact.normal;
 
-            // ● normal.y > 0.1 → 足元からの接触
-            // ● contact.point.y < プレイヤーの中心より下 → 正しく地面
-            if (normal.y > 0.1f && contact.point.y < transform.position.y - 0.05f)
+            // 条件まとめ：
+            // ・ほぼ真上方向の法線
+            // ・接触点がプレイヤー中心より下
+            // ・落下中 or ほぼ停止中
+            if (normal.y > 0.7f &&
+                contact.point.y < transform.position.y - 0.05f &&
+                rb.linearVelocity.y <= 0.1f)
             {
                 isGrounded = true;
                 return;
