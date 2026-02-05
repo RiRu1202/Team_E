@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Player_Stop_Controller_n : MonoBehaviour
 {
-    private CameraController cameraController;
+    private CameraController_n cameraController_n;
 
     // 左方向判定の許容角度（厳密にしたいなら 5～10°）
     [SerializeField] private float leftHitAngleRange = 10f;
@@ -11,7 +11,7 @@ public class Player_Stop_Controller_n : MonoBehaviour
     void Start()
     {
         // シーン内の CameraController を探して取得
-        cameraController = FindObjectOfType<CameraController>();
+        cameraController_n = FindObjectOfType<CameraController_n>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -41,14 +41,14 @@ public class Player_Stop_Controller_n : MonoBehaviour
         Debug.Log("左から wall に衝突！5秒待機...");
         yield return new WaitForSeconds(5f);
 
-        if (cameraController != null)
+        if (cameraController_n != null)
         {
-            Debug.Log("カメラ停止（0.3秒間）");
-            cameraController.isPaused = true;
+            Debug.Log("カメラ停止（0.2秒間）");
+            cameraController_n.isPaused = true;
 
             yield return new WaitForSeconds(0.3f);
 
-            cameraController.isPaused = false;
+            cameraController_n.isPaused = false;
             Debug.Log("カメラ再開！");
         }
     }
